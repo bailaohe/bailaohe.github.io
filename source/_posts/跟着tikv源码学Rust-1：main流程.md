@@ -5,5 +5,24 @@ tags: [rustlang, tikv]
 category: programming
 ---
 
+### 处理命令行参数：clap
+
+```rust
+
+```
+
+### cfg和cfg_attr
+
+blabla ...
+
+### clippy插件
+
+
+### 配置文件解析：toml
+
+
+### 日志初始化
+
+
 
 
