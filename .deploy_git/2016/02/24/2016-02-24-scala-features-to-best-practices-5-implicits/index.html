@@ -1,0 +1,737 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="scala,implicit," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="bailaohe's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="Implicit conversions and implicit parameters are Scala’s power tools that do useful work behind the scenes. With implicits, you can provide elegant libraries that hide tedious details from library use">
+<meta property="og:type" content="article">
+<meta property="og:title" content="scala features to best practices [5]: implicits">
+<meta property="og:url" content="http://yoursite.com/2016/02/24/2016-02-24-scala-features-to-best-practices-5-implicits/index.html">
+<meta property="og:site_name" content="bailaohe's blog">
+<meta property="og:description" content="Implicit conversions and implicit parameters are Scala’s power tools that do useful work behind the scenes. With implicits, you can provide elegant libraries that hide tedious details from library use">
+<meta property="og:updated_time" content="2016-12-03T08:32:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="scala features to best practices [5]: implicits">
+<meta name="twitter:description" content="Implicit conversions and implicit parameters are Scala’s power tools that do useful work behind the scenes. With implicits, you can provide elegant libraries that hide tedious details from library use">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> scala features to best practices [5]: implicits | bailaohe's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">bailaohe's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                scala features to best practices [5]: implicits
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-24T15:00:00+08:00" content="2016-02-24">
+              2016-02-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Implicit conversions and implicit parameters are Scala’s power tools that do useful work behind the scenes. With implicits, you can provide elegant libraries that hide tedious details from library users.</p>
+<h2 id="FT-6-implicit-conversion-via-implicit-method-class"><a href="#FT-6-implicit-conversion-via-implicit-method-class" class="headerlink" title="FT-6: implicit conversion (via implicit method/class)"></a>FT-6: implicit conversion (via implicit method/class)</h2><p>An implicit conversion from type S to type T is defined by an implicit value which has function type S =&gt; T, or by an implicit method convertible to a value of that type. Implicit conversions are applied in two situations:</p>
+<ul>
+<li>If an expression e is of type S, and S does not conform to the expression’s expected type T.</li>
+<li>In a selection e.m with e of type T, if the selector m does not denote a member of T.</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">implicit</span> <span class="function"><span class="keyword">def</span> <span class="title">double2Int</span></span>(d: <span class="type">Double</span>) = d.toInt</div><div class="line"><span class="keyword">val</span> x: <span class="type">Int</span> = <span class="number">42.0</span></div></pre></td></tr></table></figure>
+<h3 id="SC-6-1-enrich-an-existing-class"><a href="#SC-6-1-enrich-an-existing-class" class="headerlink" title="SC-6-1: enrich an existing class"></a>SC-6-1: enrich an existing class</h3><p>Rather than create a separate library of String utility methods, like a StringUtilities class, you want to add your own behavior(s) to the String class, so you can write code like this:</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"HAL"</span>.increment</div></pre></td></tr></table></figure>
+<p>Instead of this:<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="type">StringUtilities</span>.increment(<span class="string">"HAL"</span>)</div></pre></td></tr></table></figure></p>
+<p>Then we can enrich the String class with an implicit method as follows:</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// define a method named increment in a normal Scala class:</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">StringImprovements</span>(<span class="params">val s: <span class="type">String</span></span>) </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">increment</span> </span>= s.map(c =&gt; (c + <span class="number">1</span>).toChar)</div><div class="line">&#125;</div><div class="line"><span class="comment">// define another method to handle the implicit conversion:</span></div><div class="line"><span class="keyword">implicit</span> <span class="function"><span class="keyword">def</span> <span class="title">stringToString</span></span>(s: <span class="type">String</span>) = <span class="keyword">new</span> <span class="type">StringImprovements</span>(s)</div></pre></td></tr></table></figure>
+<p>When you call <code>increment</code> on a String, which does not has that method at all. Thus, the compiler find the compatible one <code>StringImprovements</code> and convert the string to StringImprovements via the implicit method <code>stringToString</code>, this is the scenario-2 mentioned above.</p>
+<p>Scala 2.10 introduced a new feature called implicit classes. An implicit class is a class marked with the implicit keyword. This keyword makes the class’ primary constructor available for implicit conversions when the class is in scope. This is similar to <code>monkey patching</code> in Ruby, and <code>Meta-Programming</code> in Groovy.</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">implicit</span> <span class="class"><span class="keyword">class</span> <span class="title">StringImprovements</span>(<span class="params">s: <span class="type">String</span></span>) </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">increment</span> </span>= s.map(c =&gt; (c + <span class="number">1</span>).toChar)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>In real-world code, this is just slightly more complicated. According to <a href="http://docs.scala-lang.org/sips/completed/implicit-classes.html" target="_blank" rel="external">SIP-13, Implicit Classes</a></p>
+<blockquote>
+<p>An implicit class must be defined in a scope where method definitions are allowed (not at the top level).</p>
+</blockquote>
+<p>This means that your implicit class must be defined inside a class, object, or package object. You can also check some other restrictions of implicit class here: <a href="http://docs.scala-lang.org/overviews/core/implicit-classes.html" target="_blank" rel="external">http://docs.scala-lang.org/overviews/core/implicit-classes.html</a></p>
+<h2 id="FT-7-implicit-parameter"><a href="#FT-7-implicit-parameter" class="headerlink" title="FT-7: implicit parameter"></a>FT-7: implicit parameter</h2><p>A method with implicit parameters can be applied to arguments just like a normal method. In this case the implicit label has no effect. However, if such a method misses arguments for its implicit parameters, such arguments will be automatically provided.</p>
+<p>The actual arguments that are eligible to be passed to an implicit parameter fall into two categories:</p>
+<ul>
+<li>First, eligible are all identifiers x that can be accessed at the point of the method call without a prefix and that denote an implicit definition or an implicit parameter.</li>
+<li>Second, eligible are also all members of companion modules of the implicit parameter’s type that are labeled implicit.</li>
+</ul>
+<h3 id="SC-7-1-default-parameter-value"><a href="#SC-7-1-default-parameter-value" class="headerlink" title="SC-7-1: default parameter value"></a>SC-7-1: default parameter value</h3><p>Implicits can be used to declare a value to be provided as a default as long as an implicit value is set with in the scope.</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">howMuchCanIMake_?</span></span>(hours: <span class="type">Int</span>)(<span class="keyword">implicit</span> dollarsPerHour: <span class="type">BigDecimal</span>) = dollarsPerHour * hours</div><div class="line"></div><div class="line"><span class="keyword">implicit</span> <span class="keyword">var</span> hourlyRate = <span class="type">BigDecimal</span>(<span class="number">34.00</span>)</div></pre></td></tr></table></figure>
+<p>What’s the advantage this solution takes over the simple default value in parameter definition? The search of implicit value can be taken in the scope of <code>companion object</code>, and thus you can keep the default value <code>private</code> from the caller.</p>
+<h3 id="SC-7-2-implicit-conversion-via-implicit-parameter"><a href="#SC-7-2-implicit-conversion-via-implicit-parameter" class="headerlink" title="SC-7-2: implicit conversion via implicit parameter"></a>SC-7-2: implicit conversion via implicit parameter</h3><p>An implicit function parameter is also usable as an implicit conversion, and it’s more flexible than the traditional solution. Check the following codes:</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">smaller</span></span>[<span class="type">T</span>](a: <span class="type">T</span>, b: <span class="type">T</span>)(<span class="keyword">implicit</span> order: <span class="type">T</span> =&gt; <span class="type">Ordered</span>[<span class="type">T</span>])</div><div class="line">  = <span class="keyword">if</span> (a &lt; b) a <span class="keyword">else</span> b <span class="comment">// Calls order(a) &lt; b if a doesn't have a &lt; operator</span></div></pre></td></tr></table></figure>
+<p>Note that <code>order</code> is a function with a single parameter, is tagged implicit, and has a name that is a single identifier. Therefore, it is an implicit conversion, in addition to being an implicit parameter. So, we can omit the call to order in the body of the function</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/scala/" rel="tag">#scala</a>
+          
+            <a href="/tags/implicit/" rel="tag">#implicit</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/02/24/2016-02-24-scala-features-to-best-practices-4-closure/" rel="next" title="scala features to best practices [4]: closure">
+                <i class="fa fa-chevron-left"></i> scala features to best practices [4]: closure
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/02/24/2016-02-24-jvm-gc-related-stuff/" rel="prev" title="JVM GC related stuff">
+                JVM GC related stuff <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://img1.bimg.126.net/photo/Rm9TcTLaV0KuXDr36fyNNg==/1737263556258260335.jpg"
+               alt="bailaohe" />
+          <p class="site-author-name" itemprop="name">bailaohe</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#FT-6-implicit-conversion-via-implicit-method-class"><span class="nav-number">1.</span> <span class="nav-text">FT-6: implicit conversion (via implicit method/class)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SC-6-1-enrich-an-existing-class"><span class="nav-number">1.1.</span> <span class="nav-text">SC-6-1: enrich an existing class</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FT-7-implicit-parameter"><span class="nav-number">2.</span> <span class="nav-text">FT-7: implicit parameter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SC-7-1-default-parameter-value"><span class="nav-number">2.1.</span> <span class="nav-text">SC-7-1: default parameter value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SC-7-2-implicit-conversion-via-implicit-parameter"><span class="nav-number">2.2.</span> <span class="nav-text">SC-7-2: implicit conversion via implicit parameter</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bailaohe</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

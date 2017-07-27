@@ -1,0 +1,728 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="scala,delayed,by-name,lazy," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="bailaohe's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="features: delayed evaluationI’d like to use the term delayed evaluation to cover following two features in scala: lazy var/val and byname parameter. They are not quite related to each other, but both">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scala features to best practices [1]: delayed evaluation">
+<meta property="og:url" content="http://yoursite.com/2016/02/22/2016-02-22-scala-features-to-best-practices-1-delayed-evaluation/index.html">
+<meta property="og:site_name" content="bailaohe's blog">
+<meta property="og:description" content="features: delayed evaluationI’d like to use the term delayed evaluation to cover following two features in scala: lazy var/val and byname parameter. They are not quite related to each other, but both">
+<meta property="og:updated_time" content="2016-12-03T08:32:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scala features to best practices [1]: delayed evaluation">
+<meta name="twitter:description" content="features: delayed evaluationI’d like to use the term delayed evaluation to cover following two features in scala: lazy var/val and byname parameter. They are not quite related to each other, but both">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Scala features to best practices [1]: delayed evaluation | bailaohe's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">bailaohe's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Scala features to best practices [1]: delayed evaluation
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-22T00:00:00+08:00" content="2016-02-22">
+              2016-02-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="features-delayed-evaluation"><a href="#features-delayed-evaluation" class="headerlink" title="features: delayed evaluation"></a>features: delayed evaluation</h2><p>I’d like to use the term <code>delayed evaluation</code> to cover following two features in scala: <code>lazy var/val</code> and <code>byname parameter</code>. They are not quite related to each other, but both are to postpone the evaluation of a given expression or block for the final result.</p>
+<h2 id="FT-1-lazy-var-val"><a href="#FT-1-lazy-var-val" class="headerlink" title="FT-1: lazy var/val"></a>FT-1: lazy var/val</h2><p>Defining a field as <code>lazy</code> is a useful approach when the field might not be accessed in the normal processing of your algorithms, or if running the algorithm will take a long time, and you want to defer that to a later time.</p>
+<p>At present, I think its useful in following scenarios:</p>
+<h3 id="SC-1-1-field-initialization-takes-great-efforts"><a href="#SC-1-1-field-initialization-takes-great-efforts" class="headerlink" title="SC-1-1: field-initialization takes great efforts"></a>SC-1-1: field-initialization takes great efforts</h3><p>It makes sense to use <code>lazy</code> on a class field if its initialization requires a long time to run, and we don’t want to do the job when we instantiate the class until we actually use the field.</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</div><div class="line">  <span class="keyword">lazy</span> <span class="keyword">val</span> text = io.<span class="type">Source</span>.fromFile(<span class="string">"/etc/passwd"</span>).getLines.foreach(println)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">Test</span> <span class="keyword">extends</span> <span class="title">App</span> </span>&#123;</div><div class="line">  <span class="keyword">val</span> f = <span class="keyword">new</span> <span class="type">Foo</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>In above example, the initialization of <code>text</code> needs to retrieve the contents of the text file <code>/etc/passwd</code>. But when this code is compiled and run, there is no output, because the text field isn’t initialized until it’s accessed. That’s how a lazy field works.</p>
+<h3 id="SC-1-2-field-initialization-has-dependencies"><a href="#SC-1-2-field-initialization-has-dependencies" class="headerlink" title="SC-1-2: field-initialization has dependencies"></a>SC-1-2: field-initialization has dependencies</h3><p>Sometimes we need to initialize fields in a specific order because they have dependency on the other. Then we may produce following ugly codes:</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SparkStreamDemo</span> <span class="keyword">extends</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line"></div><div class="line">  <span class="meta">@transient</span> <span class="keyword">private</span> <span class="keyword">var</span> conf: <span class="type">SparkConf</span> = <span class="literal">null</span></div><div class="line">  <span class="meta">@transient</span> <span class="keyword">private</span> <span class="keyword">var</span> sc: <span class="type">SparkContext</span> = <span class="literal">null</span></div><div class="line">  <span class="meta">@transient</span> <span class="keyword">private</span> <span class="keyword">var</span> ssc: <span class="type">StreamingContext</span> = <span class="literal">null</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">getConf</span></span>() = &#123;</div><div class="line">    <span class="keyword">if</span> (conf == <span class="literal">null</span>)</div><div class="line">      conf = <span class="keyword">new</span> <span class="type">SparkConf</span>()</div><div class="line">    conf</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">getSC</span></span>() = &#123;</div><div class="line">    <span class="keyword">if</span> (sc == <span class="literal">null</span>)</div><div class="line">      sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(getConf)</div><div class="line">    sc</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">getSSC</span></span>() = &#123;</div><div class="line">    <span class="keyword">if</span> (ssc == <span class="literal">null</span>)</div><div class="line">      ssc = <span class="keyword">new</span> <span class="type">StreamingContext</span>(getSC, <span class="type">Seconds</span>(<span class="number">10</span>))</div><div class="line">    ssc</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>In this spark-streaming demo, the initialization of <code>ssc</code> depends on that of <code>sc</code>, which further depends on <code>conf</code>. We operate the initialize manually, thus we define these fields with <code>var</code>, and implement the lazy initialization in getters. The shortcoming is obvious, we have to restrict the access of these field through getters, otherwise we may get the null-valued ones! Moreover, defining <code>var</code> to these fields is not best-practice since they are readonly after initialization. A modified version via <code>lazy val/var</code> is as follows:</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SparkStreamDemo</span> <span class="keyword">extends</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line">  <span class="meta">@transient</span> <span class="keyword">lazy</span> <span class="keyword">val</span> conf: <span class="type">SparkConf</span> = <span class="keyword">new</span> <span class="type">SparkConf</span>()</div><div class="line">  <span class="meta">@transient</span> <span class="keyword">lazy</span> <span class="keyword">val</span> sc: <span class="type">SparkContext</span> = <span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</div><div class="line">  <span class="meta">@transient</span> <span class="keyword">lazy</span> <span class="keyword">val</span> ssc: <span class="type">StreamingContext</span> = <span class="keyword">new</span> <span class="type">StreamingContext</span>(sc, <span class="type">Seconds</span>(<span class="number">10</span>))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>What if a <code>lazy</code> field depends on a <code>non-lazy</code> var, which is not properly initialzed? Can the instance be re-used after some <code>NullPointerException</code>-like error raised? This seems no problem as scala provides a tricky, as @ViktorKlang posted on Twitter:</p>
+<blockquote>
+<p>Little known Scala fact: if the initialization of a lazy val throws an exception, it will attempt to reinitialize the val at next access.</p>
+</blockquote>
+<p>You can check the details here: <a href="http://scalapuzzlers.com/#pzzlr-012" target="_blank" rel="external">http://scalapuzzlers.com/#pzzlr-012</a></p>
+<h2 id="FT-2-by-name-parameter"><a href="#FT-2-by-name-parameter" class="headerlink" title="FT-2: by-name parameter"></a>FT-2: by-name parameter</h2><p>The by-name parameter can be considered equivalent to <code>() =&gt; Int</code>, which is a <code>Function type</code> that takes a Unit type argument. Besides from normal functions, it can also be used with an <code>Object</code> and <code>apply</code> to make interesting block-like calls.</p>
+<h3 id="SC-2-1-wrapper-function"><a href="#SC-2-1-wrapper-function" class="headerlink" title="SC-2-1: wrapper function"></a>SC-2-1: wrapper function</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// A benchmark construct:</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">benchmark</span> </span>(body : =&gt; <span class="type">Unit</span>) : <span class="type">Long</span> = &#123;</div><div class="line">  <span class="keyword">val</span> start = java.util.<span class="type">Calendar</span>.getInstance().getTimeInMillis()</div><div class="line">  body</div><div class="line">  <span class="keyword">val</span> end = java.util.<span class="type">Calendar</span>.getInstance().getTimeInMillis()</div><div class="line">  end - start</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">val</span> time = benchmark &#123;</div><div class="line">  <span class="keyword">var</span> i = <span class="number">0</span> ;</div><div class="line">  <span class="keyword">while</span> (i &lt; <span class="number">1000000</span>) &#123;</div><div class="line">    i += <span class="number">1</span> ;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">println(<span class="string">"while took:   "</span> + time)</div></pre></td></tr></table></figure>
+<h3 id="SC-2-2-Add-syntactic-sugar"><a href="#SC-2-2-Add-syntactic-sugar" class="headerlink" title="SC-2-2: Add syntactic sugar"></a>SC-2-2: Add syntactic sugar</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// While loops are syntactic sugar in Scala:</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">myWhile</span> </span>(cond : =&gt; <span class="type">Boolean</span>) (body : =&gt; <span class="type">Unit</span>) : <span class="type">Unit</span> =</div><div class="line">  <span class="keyword">if</span> (cond) &#123; body ; myWhile (cond) (body) &#125; <span class="keyword">else</span> ()</div><div class="line"></div><div class="line"><span class="keyword">var</span> i = <span class="number">0</span> ;</div><div class="line"></div><div class="line">myWhile (i &lt; <span class="number">4</span>) &#123; i += <span class="number">1</span> ; println (i) &#125;</div></pre></td></tr></table></figure>
+<p>Accompany with <code>curry</code>, we re-implement a while-loop in above example.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/scala/" rel="tag">#scala</a>
+          
+            <a href="/tags/delayed/" rel="tag">#delayed</a>
+          
+            <a href="/tags/by-name/" rel="tag">#by-name</a>
+          
+            <a href="/tags/lazy/" rel="tag">#lazy</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/02/22/2016-02-22-xiaomei-bi-design/" rel="next" title="xiaomei BI design">
+                <i class="fa fa-chevron-left"></i> xiaomei BI design
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/02/23/2016-02-23-scala-features-to-best-practices-2-companion-object/" rel="prev" title="Scala features to best practices [2]: companion object">
+                Scala features to best practices [2]: companion object <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://img1.bimg.126.net/photo/Rm9TcTLaV0KuXDr36fyNNg==/1737263556258260335.jpg"
+               alt="bailaohe" />
+          <p class="site-author-name" itemprop="name">bailaohe</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#features-delayed-evaluation"><span class="nav-number">1.</span> <span class="nav-text">features: delayed evaluation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FT-1-lazy-var-val"><span class="nav-number">2.</span> <span class="nav-text">FT-1: lazy var/val</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SC-1-1-field-initialization-takes-great-efforts"><span class="nav-number">2.1.</span> <span class="nav-text">SC-1-1: field-initialization takes great efforts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SC-1-2-field-initialization-has-dependencies"><span class="nav-number">2.2.</span> <span class="nav-text">SC-1-2: field-initialization has dependencies</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FT-2-by-name-parameter"><span class="nav-number">3.</span> <span class="nav-text">FT-2: by-name parameter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SC-2-1-wrapper-function"><span class="nav-number">3.1.</span> <span class="nav-text">SC-2-1: wrapper function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SC-2-2-Add-syntactic-sugar"><span class="nav-number">3.2.</span> <span class="nav-text">SC-2-2: Add syntactic sugar</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bailaohe</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
