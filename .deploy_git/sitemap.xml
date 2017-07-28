@@ -4,40 +4,12 @@
   <url>
     <loc>http://yoursite.com/2017/07/27/%E8%B7%9F%E7%9D%80tikv%E6%BA%90%E7%A0%81%E5%AD%A6Rust-1%EF%BC%9Amain%E6%B5%81%E7%A8%8B/</loc>
     
-    <lastmod>2017-07-27T05:43:51.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2016/02/24/2016-02-24-jvm-gc-related-stuff/</loc>
-    
-    <lastmod>2016-12-03T08:32:49.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2016/02/23/2016-02-23-scala-features-to-best-practices-2-companion-object/</loc>
-    
-    <lastmod>2016-12-03T08:32:49.000Z</lastmod>
+    <lastmod>2017-07-28T02:27:05.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yoursite.com/2016/02/24/2016-02-24-scala-features-to-best-practices-4-closure/</loc>
-    
-    <lastmod>2016-12-03T08:32:49.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2016/02/24/2016-02-24-scala-features-to-best-practices-5-implicits/</loc>
-    
-    <lastmod>2016-12-03T08:32:49.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2016/02/22/2016-02-22-xiaomei-bi-design/</loc>
     
     <lastmod>2016-12-03T08:32:49.000Z</lastmod>
     
@@ -51,7 +23,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2016/04/20/Use-SparkSQL-to-build-a-OLAP-database-across-different-datasources/</loc>
+    <loc>http://yoursite.com/2016/02/23/2016-02-23-scala-features-to-best-practices-2-companion-object/</loc>
+    
+    <lastmod>2016-12-03T08:32:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/02/24/2016-02-24-jvm-gc-related-stuff/</loc>
     
     <lastmod>2016-12-03T08:32:49.000Z</lastmod>
     
@@ -59,6 +38,27 @@
   
   <url>
     <loc>http://yoursite.com/2016/02/22/2016-02-22-scala-features-to-best-practices-1-delayed-evaluation/</loc>
+    
+    <lastmod>2016-12-03T08:32:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/02/22/2016-02-22-xiaomei-bi-design/</loc>
+    
+    <lastmod>2016-12-03T08:32:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/02/24/2016-02-24-scala-features-to-best-practices-5-implicits/</loc>
+    
+    <lastmod>2016-12-03T08:32:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/04/20/Use-SparkSQL-to-build-a-OLAP-database-across-different-datasources/</loc>
     
     <lastmod>2016-12-03T08:32:49.000Z</lastmod>
     
