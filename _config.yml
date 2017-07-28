@@ -70,3 +70,4 @@ theme: next
 deploy:
   type: git
   repository: https://github.com/bailaohe/bailaohe.github.io.git
+  branch: gh-pages
