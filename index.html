@@ -1,0 +1,1698 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="bailaohe's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="bailaohe's blog">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="bailaohe's blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="bailaohe's blog">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> bailaohe's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">bailaohe's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/07/29/tikv-0-prepare/" itemprop="url">
+                  跟着tikv源码学rust-0：开篇和准备
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-07-29T00:28:37+08:00" content="2017-07-29">
+              2017-07-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近一段时间，非常关注tidb这个开源项目。个人感觉，这个项目和蚂蚁的OceanBase是从两个层次，尝试从数据库层面上解决应用扩展的痛点。前者关注金融级应用，因此更强调跨数据中心的实物一致性和高可用；后者相比之下更为“亲民”，作为一个后端程序员，能够有朝一日将一切持久化的扩展问题都交给数据库，开发一套业务代码，能够在几十到几十万并发访问下“平趟”，是件多爽的事！</p>
+<p>不过羞羞地说，眼下对tidb存储服务tikv的开发语言rust都还没入门，想顺利的分析代码进而有所贡献有点儿不切实际。不过根据我之前对rust的简单学习感受来说，这门语言学习曲线太陡了。不结合一个实体项目，反复嚼rustbook实在很难理解那么多零碎复杂的特性。所以我决定换个思路，从tikv入手，看看优质rust项目的开发套路，边看边学，应该感悟会更加深刻。</p>
+<p>我的初步打算是，从对tikv感兴趣的几个功能模块入手，对代码进行由表及里的分析，结合之前对数据库存储开发一点儿经历，学习分布式数据库存储的原理和架构。对于每部分代码用到的rust语言的feature，回到rustbook或者其他学习材料，进行学习和总结。希望能坚持下去。</p>
+<h2 id="学习-开发环境"><a href="#学习-开发环境" class="headerlink" title="学习/开发环境"></a>学习/开发环境</h2><ul>
+<li>操作系统：MacOS Sierra 10.12.5</li>
+<li>IDE：Visual Studio Code 1.14.2（插件：rust 0.4.2 + racer）</li>
+<li>Rust: rustup管理nightly-2017-05-29-x86_64-apple-darwin (tikv基于该环境编译和测试)</li>
+</ul>
+<h2 id="第一个PR"><a href="#第一个PR" class="headerlink" title="第一个PR"></a>第一个PR</h2><p>为了给自己迈出第一步的契机，参加了PingCAP的社区活动：<a href="https://pingcap.com/blog-tikv-built-in-zh" target="_blank" rel="external">十分钟成为Contributor</a>，为tikv提交了本人的第一个pr。pr本身没什么可说的，只是实现一个简单的abs内建函数。但作为一个对rust只有理论基础的人，借此机会完整地对tikv进行一次编译，还是踩了些坑，得到了不少实践感受。</p>
+<h3 id="nightly版本、jemalloc和libc"><a href="#nightly版本、jemalloc和libc" class="headerlink" title="nightly版本、jemalloc和libc"></a>nightly版本、jemalloc和libc</h3><p>和大多数rust项目一样，tikv也是night-only的。使用rustup升级到最新的nightly，编译tikv出现如下编译错误</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fi41ibf0kqj30t3085mys.jpg" alt="jemalloc编译错误"></p>
+<p>到rustup的lib目录下翻了翻，果然有两个对应libc的rlib文件。在1.20前似乎都只有一个libc文件。网上查了很久也没找到原因，所以暂时只能乖乖用PingCAP推荐的nightly-2017-05-29-x86_64编译了。</p>
+<p>note: 后来发现</p>
+<h3 id="librocksdb的版本"><a href="#librocksdb的版本" class="headerlink" title="librocksdb的版本"></a>librocksdb的版本</h3><p>tikv底层使用facebook的rocksdb作为单节点的kv存储。rocksdb是一个C++工程，所以其头文件的版本也至关重要。在写这篇文章的时候，tikv刚刚把对rocksdb的版本依赖从5.5.1升级到5.6.1。如果没有安装对应版本的rocksdb头文件，会出现如下编译错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">running: <span class="string">"c++"</span> <span class="string">"-O0"</span> <span class="string">"-ffunction-sections"</span> <span class="string">"-fdata-sections"</span> <span class="string">"-fPIC"</span> <span class="string">"-g"</span> <span class="string">"-m64"</span> <span class="string">"-std=c++11"</span> <span class="string">"-o"</span> <span class="string">"/Users/baihe/project/github/tikv/target/debug/build/librocksdb_sys-865a78dfa907ba49/out/crocksdb/c.o"</span> <span class="string">"-c"</span> <span class="string">"crocksdb/c.cc"</span></div><div class="line">cargo:warning=crocksdb/c.cc:2115:12: error: no member named <span class="string">'max_background_jobs'</span> <span class="keyword">in</span> <span class="string">'rocksdb::Options'</span>; did you mean <span class="string">'max_background_flushes'</span>?</div><div class="line">cargo:warning=  opt-&gt;rep.max_background_jobs = n;</div><div class="line">cargo:warning=           ^~~~~~~~~~~~~~~~~~~</div><div class="line">cargo:warning=           max_background_flushes</div><div class="line">cargo:warning=/usr/<span class="built_in">local</span>/include/rocksdb/options.h:506:7: note: <span class="string">'max_background_flushes'</span> declared here</div><div class="line">cargo:warning=  int max_background_flushes = 1;</div><div class="line">cargo:warning=      ^</div><div class="line">cargo:warning=crocksdb/c.cc:3181:11: warning: 7 enumeration values not handled <span class="keyword">in</span> switch: <span class="string">'kColumnFamilyName'</span>, <span class="string">'kFilterPolicyName'</span>, <span class="string">'kComparatorName'</span>... [-Wswitch]</div><div class="line">cargo:warning=  switch (prop) &#123;</div><div class="line">cargo:warning=          ^</div><div class="line">cargo:warning=crocksdb/c.cc:3210:11: warning: 10 enumeration values not handled <span class="keyword">in</span> switch: <span class="string">'kDataSize'</span>, <span class="string">'kIndexSize'</span>, <span class="string">'kFilterSize'</span>... [-Wswitch]</div><div class="line">cargo:warning=  switch (prop) &#123;</div><div class="line">cargo:warning=          ^</div><div class="line">cargo:warning=2 warnings and 1 error generated.</div><div class="line"><span class="built_in">exit</span> code: 1</div></pre></td></tr></table></figure>
+<h3 id="rustfmt问题"><a href="#rustfmt问题" class="headerlink" title="rustfmt问题"></a>rustfmt问题</h3><p>PingCAP团队使用的rustfmt是 0.6 的版本，如果使用最新版本会导致测试用例编译失败。</p>
+<h2 id="rust-clippy"><a href="#rust-clippy" class="headerlink" title="rust-clippy"></a>rust-clippy</h2><p>tikv项目中使用了rust-clippy。这是一个常用的rust源码检查工具，帮助开发者保证代码质量，避免不当的代码实践。由于本人目前rust零基础，却仍希望未来用rust做些事情的希望，这类工具对我是非常有价值的。</p>
+<p>rust-clippy本身是一个rust编译器插件，tikv中将它作为一个optional依赖，通过cargo或者rustc在编译时控制feature：clippy来实现打开/关闭该插件。</p>
+<p>clippy在打开状态下，可以检查出类似如下的代码问题：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">src/main.rs:8:5: 11:6 warning: you seem to be trying to use match <span class="keyword">for</span> destructuring a single type. Consider using `<span class="keyword">if</span> <span class="built_in">let</span>`, <span class="comment">#[warn(single_match)] on by default</span></div><div class="line">src/main.rs:8     match x &#123;</div><div class="line">src/main.rs:9         Some(y) =&gt; println!(<span class="string">"&#123;:?&#125;"</span>, y),</div><div class="line">src/main.rs:10         _ =&gt; ()</div><div class="line">src/main.rs:11     &#125;</div><div class="line">src/main.rs:8:5: 11:6 <span class="built_in">help</span>: Try</div><div class="line"><span class="keyword">if</span> <span class="built_in">let</span> Some(y) = x &#123; println!(<span class="string">"&#123;:?&#125;"</span>, y) &#125;</div></pre></td></tr></table></figure>
+<p>非常棒，我准备把rust-clippy作为以后rust项目的必备依赖。rust-clippy还有其他使用方法，具体可以浏览其<a href="https://github.com/rust-lang-nursery/rust-clippy" target="_blank" rel="external">github主页文档</a>。值得一提的是，rust-clippy也是个nightly-only项目。</p>
+<h2 id="Rust学习点"><a href="#Rust学习点" class="headerlink" title="Rust学习点"></a>Rust学习点</h2><p>这个系列应该是本人通过tikv源码学习rust和数据库技术的笔记。因此希望在每篇文章的结尾，对于这部分工作学习到的rust的关键点进行总结。并对这些关键点做编号，帮助反向索引。</p>
+<h3 id="KP-01：条件编译和feature"><a href="#KP-01：条件编译和feature" class="headerlink" title="KP-01：条件编译和feature"></a>KP-01：条件编译和feature</h3><p>上文中提到的rust-clippy作为编译器插件，由feature控制打开/关闭状态，因此去查询了feature和条件编译相关的功能。</p>
+<h4 id="属性（Attribute）"><a href="#属性（Attribute）" class="headerlink" title="属性（Attribute）"></a>属性（Attribute）</h4><p>属性是rust中支持的一种<code>修饰符(Annotation)</code>，通常用在一个声明（struct、mod、……）上，具体定义可以看<a href="https://doc.rust-lang.org/book/first-edition/attributes.html" target="_blank" rel="external">rustbook第一版中对于属性的描述</a>。完整的reference在<a href="https://doc.rust-lang.org/reference/attributes.html" target="_blank" rel="external">这里</a>，等有机会在看（估计就不会看……）。</p>
+<h4 id="cfg-cfg-attr属性"><a href="#cfg-cfg-attr属性" class="headerlink" title="cfg/cfg_attr属性"></a>cfg/cfg_attr属性</h4><p>在rust语言的一大堆属性中，有一类特殊属性，可以根据编译器传入的feature开关，控制代码编译的行为。该属性主要有如下两种方式：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#[cfg(foo)]</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Foo</span></span>;</div><div class="line"></div><div class="line"><span class="meta">#[cfg(feature = <span class="meta-string">"bar"</span>)]</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Bar</span></span></div><div class="line"></div><div class="line"><span class="meta">#[cfg(target_os = <span class="meta-string">"macos"</span>)]</span></div><div class="line"><span class="function"><span class="keyword">fn</span> <span class="title">macos_only</span></span>() &#123;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>放到C语言里，相当于预编译开关，代码比解释更明白：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">if</span> foo == true</span></div><div class="line"><span class="keyword">struct</span> Foo;</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> bar</span></div><div class="line"><span class="keyword">struct</span> Bar;</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">if</span> target_os == <span class="meta-string">"macos"</span></span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">macos_only</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="comment">// ...</span></div><div class="line">&#125;</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure>
+<p>另外在<code>cfg</code>属性里还支持布尔组合，如下所示：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#[cfg(any(foo, bar))]</span></div><div class="line"><span class="function"><span class="keyword">fn</span> <span class="title">needs_foo_or_bar</span></span>() &#123;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">#[cfg(all(unix, target_pointer_width = <span class="meta-string">"32"</span>))]</span></div><div class="line"><span class="function"><span class="keyword">fn</span> <span class="title">on_32bit_unix</span></span>() &#123;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">#[cfg(not(foo))]</span></div><div class="line"><span class="function"><span class="keyword">fn</span> <span class="title">needs_not_foo</span></span>() &#123;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>不用看文档，猜也能才出来<code>all</code>、<code>any</code>、<code>not</code>对应的是与、或、非。这些布尔表达式也支持嵌套，来实现更为复杂的条件判断。但总体而言，我还是更喜欢C语言的写法。</p>
+<p><code>cfg_attr</code>属性有两个操作数，可以基于条件来设置其他属性。<br><figure class="highlight rust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#[cfg_attr(a, b)]</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Foo</span></span>;</div></pre></td></tr></table></figure></p>
+<p>在条件a满足的情况下，相当于<br><figure class="highlight rust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#[b]</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Foo</span></span>;</div></pre></td></tr></table></figure></p>
+<p>否则就完全没有作用。</p>
+<p><a href="https://chrismorgan.info/blog/rust-cfg_attr.html" target="_blank" rel="external">这篇文章</a>描述了很多基于cfg_attr的有趣玩法，特别是可以实现动态文档和动态宏定义，有兴趣可以实践一下。</p>
+<h4 id="feature和plugin"><a href="#feature和plugin" class="headerlink" title="feature和plugin"></a>feature和plugin</h4><figure class="highlight rust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#![feature(plugin)]</span></div><div class="line"><span class="meta">#![cfg_attr(feature = <span class="meta-string">"dev"</span>, plugin(clippy))]</span></div></pre></td></tr></table></figure>
+<p>上述代码出现在tikv源代码tikv-server.rs的文件开头，有了对于条件编译的相关背景，我们知道上述代码的作用是：</p>
+<ol>
+<li>打开feature：plugin用于支持插件加载</li>
+<li>如果编译器传入feature包含dev，使插件clippy生效</li>
+</ol>
+<p>note: 为啥用的是<code>#![cfg]</code>/<code>!#[cfg_attr]</code>而不是<code>#[cfg]</code>/<code>#[cfg_attr]</code>？看看<a href="https://doc.rust-lang.org/book/first-edition/attributes.html" target="_blank" rel="external">文档</a>就知道了。</p>
+<p>在tikv的cargo.toml文件中</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[features]</div><div class="line">default = []</div><div class="line">dev = ["clippy"]</div><div class="line">...</div><div class="line"></div><div class="line">[dependencies]</div><div class="line">clippy = &#123;version = "*", optional = true&#125;</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>这样，在tikv编译过程中，我们就可以通过执行<code>cargo build --features &quot;dev&quot;</code>将参数<code>--cfg feature=&quot;foo&quot;</code>传递给rustc编译器，就会引入optional依赖<code>clippy</code>，并依照代码中的<code>cfg_attr</code>属性为编译器加载<code>clippy</code>提供的插件。</p>
+<p>根据crates.io文档<a href="http://doc.crates.io/manifest.html" target="_blank" rel="external">The Manifest Format</a>，feature是用户在cargo.toml中定义的编译器flag：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">[features]</div><div class="line"></div><div class="line"># 默认feature集合，设置为空</div><div class="line">default = []</div><div class="line"></div><div class="line"># foo是没有依赖的feature，主要用于条件编译，例如：`#[cfg(feature = "foo")]`</div><div class="line">foo = []</div><div class="line"></div><div class="line"># dev是依赖于optional依赖clippy的feature。一方面dev可以作为alias让我们以更可读的方式描述feature，</div><div class="line">另一方面可以通过optional依赖引入该feature的扩展功能，如clippy提供的编译器插件。</div><div class="line">dev = ["clippy"]</div><div class="line"></div><div class="line"># session是对于外部依赖cookie提供的另一个feature：cookie的alias</div><div class="line">session = ["cookie/session"]</div><div class="line"></div><div class="line"># feature可以是一个组依赖，其中然包括optional依赖，也可以是session这种其他feature</div><div class="line">group-feature = ["jquery", "uglifier", "session"]</div><div class="line"></div><div class="line">[dependencies]</div><div class="line">cookie = "1.2.0"</div><div class="line"></div><div class="line">jquery = &#123; version = "1.0.2", optional = true &#125;</div><div class="line">uglifier = &#123; version = "1.5.3", optional = true &#125;</div><div class="line">clippy = &#123; version = "*", optional = true &#125;</div></pre></td></tr></table></figure>
+<h3 id="stable-nightly的区别"><a href="#stable-nightly的区别" class="headerlink" title="stable/nightly的区别"></a>stable/nightly的区别</h3><p>这是我学习rust最困惑的地方，似乎接触到的所有rust项目都声明自己是nightly-only，那stable还有个毛用啊？直到在<a href="http://xion.io/post/programming/rust-nightly-vs-stable.html" target="_blank" rel="external">A tale of two Rusts</a>这篇文章中看到这么一句话：</p>
+<blockquote>
+<p>Stable Rust is dead. Nightly Rust is the only Rust.</p>
+</blockquote>
+<p>Rust的stable和nightly的差别，可以类比python的2和3，甚至差异更大。文章中任务rust的nightly可以被认为是另一门变成语言。一方面，很多feature只有在nightly中才可以使用，这些特性在rustc的-Z参数中。如果在stable中使用该参数，会看到如下信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; rustc -Z extra-plugins=clippy                                                                             </div><div class="line">error: the option `Z` is only accepted on the nightly compiler</div></pre></td></tr></table></figure>
+<p>这些feature需要在nightly中经过实践验证，稳定后才有可能移入stable中。</p>
+<p>另一方面，存在一个重要的feature，永远不大可能从nightly进入stable。就是rust-clippy用到的：<br><figure class="highlight rust"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#![feature(plugin)]</span></div></pre></td></tr></table></figure></p>
+<p>可以认为凡是需要code-generation的rust程序，都得使用该feature。为啥改feature不可能stable，原文中的描述没怎么看懂，先放到这里，以后参悟：</p>
+<blockquote>
+<p>Why compiler plugins can never be stable, though? It’s because the internal API they are coded against goes too deep into the compiler bowels to ever get stabilized. If it were, it would severely limit the ability to further develop the language without significant breakage of the established plugins.</p>
+</blockquote>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li>rustbook-1st中的<a href="https://doc.rust-lang.org/book/first-edition/conditional-compilation.html#conditional-compilation" target="_blank" rel="external">Conditional Compilation</a>和<a href="https://doc.rust-lang.org/book/first-edition/attributes.html" target="_blank" rel="external">Attributes</a></li>
+<li><a href="https://chrismorgan.info/blog/rust-cfg_attr.html" target="_blank" rel="external">Quick tip: the <code>#[cfg_attr]</code> attribute</a></li>
+<li><a href="http://xion.io/post/programming/rust-nightly-vs-stable.html" target="_blank" rel="external">A tale of two Rusts</a></li>
+<li>crates.io文档<a href="http://doc.crates.io/manifest.html" target="_blank" rel="external">The Manifest Format</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/07/28/rust-features/" itemprop="url">
+                  rust中的一些要点
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-07-28T19:55:03+08:00" content="2017-07-28">
+              2017-07-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="lifetime消除规则"><a href="#lifetime消除规则" class="headerlink" title="lifetime消除规则"></a>lifetime消除规则</h2><p>在rust中，每一个引用(reference)都拥有一个lifetime。rust对于安全性和编译时解决大部分问题的执着，要求我们在定义使用引用的函数或者结构体的时，需要指明引用的lifetime。在1.0版本之前，所有引用的lifetime都必须由开发者通过标注(annotation)的形式显式指定。之后，rust语言开发团队逐渐发现了一些可以预测lifetime的“套路”，并将其集成入后续版本中，使得rust程序员在很多情况下不需要为所有引用指定lifetime标注。 这些“套路”被总结为<code>lifetime消除规则</code>。</p>
+<p>在rust的函数定义中，参数和返回值的lifetime分别称为<code>输入lifetime</code>和<code>输出lifetime</code>。如下3条规则中，规则1适配输入lifetime，规则2、3适配输出lifetime。如果rust编译器在尝试这3条规则后，仍然无法推断所有引用的lifetime，则会编译报错。</p>
+<ol>
+<li><p>函数中每个参数都有相应独立的输入lifetime. 例如，<code>fn foo&lt;&#39;a&gt;(x: &amp;&#39;a i32)</code>和<code>fn foo&lt;&#39;a, &#39;b&gt;(x: &amp;&#39;a i32, y: &amp;&#39;b i32)</code>；</p>
+</li>
+<li><p>如果函数只有一个输入lifetime，<code>&#39;a</code>，则所有返回值的输出lifetime都为<code>&#39;a</code>。即<code>fn foo&lt;&#39;a&gt;(x: &amp;&#39;a i32) -&gt; &amp;&#39;a i32</code>；</p>
+</li>
+<li><p>如果函数有多个输入lifetime，但其中一个是<code>&amp;self</code>或<code>&amp;mut self</code>。即该函数是一个对象方法，则可以将self引用的lifetime赋给该方法的所有输出lifetime。</p>
+</li>
+</ol>
+<p>需要注意的是，上述lifetime消除规则，描述或者预测的其实是输入lifetime和输出lifetime的绑定关系。rust语言的特性要求在编译时刻，明确当前命名空间下所有引用的生命周期，以进行安全性检查，防止“野引用/指针(dangling references)”。但如果当前命名空间中有个发生了borrow行为的函数调用的返回值中又包含一个新的引用x，如何判定这个x的lifetime呢？</p>
+<p>首先，rust要求引用不能比它指向的变量“活得更长”，因此这个返回的引用x的lifetime一定和输入lifetime有某种对应关系;</p>
+<p>同时，出于编译器实现的可行性，我们不可能在编译时分析所有返回引用的函数定义，更不要说函数定义中可能包含多层调用嵌套……</p>
+<p>所以，rust语言开发团队最后选择“尽人事，听天命”：适配了上述lifetime消除规则的，编译器可以在不分析函数定义，只查看函数声明的前提下推断输出lifetime；其他的漏网之鱼只能靠程序员拉编译器一把了……</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/04/20/Use-SparkSQL-to-build-a-OLAP-database-across-different-datasources/" itemprop="url">
+                  Use SparkSQL to build a OLAP database across different datasources
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-20T13:20:35+08:00" content="2016-04-20">
+              2016-04-20
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="http://spark.apache.com" target="_blank" rel="external">Spark</a> is a large-scale data processing engine. <a href="https://spark.apache.org/docs/latest/sql-programming-guide.html" target="_blank" rel="external">SparkSQL</a>, one of its important component, can access the Hive metastore service to handle Hive tables directly. Furthermore, SparkSQL also provides approach to use data from other external datasources (JDBC to RDB, Mongo, HBase, etc).</p>
+<h2 id="Original-Target"><a href="#Original-Target" class="headerlink" title="Original Target"></a>Original Target</h2><p>In my work, I need to handle data from different datasources (mostly Mysql &amp; Mongo) to generate the final OLAP query result. Our goal is to establish a universal data platform to access, especially to process <code>JOIN</code> operation across schema on multiple datasources.</p>
+<h2 id="Approach-1-Pandas-ETL-engine"><a href="#Approach-1-Pandas-ETL-engine" class="headerlink" title="Approach-1: Pandas ETL engine"></a>Approach-1: Pandas ETL engine</h2><p>We originally used <a href="http://pandas.pydata.org/" target="_blank" rel="external">pandas</a> to load required schemas as (pandas) Dataframes and then process all data operations within memory. This approach, however, is</p>
+<ul>
+<li><strong>Time Consuming</strong>: requires great efforts to load dataframes into memory</li>
+<li><strong>Lack of Scalability</strong>: cannot handle large-scale data well since the entire platform is resided in single node.</li>
+<li><strong>Difficult to Access</strong>: needs pandas APIs to process all the data operations. There are methods to use SQL to handle pandas Dataframe (e.g., <a href="https://github.com/keeganmccallum/sql4pandas" target="_blank" rel="external">sql4pandas</a>), but the supported sql syntax is limited.</li>
+</ul>
+<p>At last, we come to Spark. In SparkSQL, the basic operational data unit is also <code>DataFrame</code>, no matter a table in RDB, a collection in MongoDB, or a document in ElasticSearch. Moreover, its <code>lazy evaluation</code> of Dataframe enable it to process ETL job until the time we really need to access it, which makes it efficient in data handling and aware of change of external datasource.</p>
+<h2 id="Approach-2-PySpark-Jupyter-Notebook"><a href="#Approach-2-PySpark-Jupyter-Notebook" class="headerlink" title="Approach-2: PySpark Jupyter Notebook"></a>Approach-2: PySpark Jupyter Notebook</h2><p>The idea is very easy, we register all Dataframes as temporary tables at first. Then we can use sql via Spark SQLContext to operate multiple datasources directly. Its easy to setup the jupyter notebook environment using PySpark. You can check the following demo notebook at my github repository (<a href="https://github.com/bailaohe/spark-notebook" target="_blank" rel="external">here</a>). I post the source code as follows.</p>
+<h3 id="Initialize-pySpark-Environment"><a href="#Initialize-pySpark-Environment" class="headerlink" title="Initialize pySpark Environment"></a>Initialize pySpark Environment</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"></div><div class="line"><span class="comment"># Add support to access mysql</span></div><div class="line">SPARK_CLASSPATH = <span class="string">"./libs/mysql-connector-java-5.1.38-bin.jar"</span></div><div class="line"><span class="comment"># Add support to access mongo (from official)</span></div><div class="line">SPARK_CLASSPATH += <span class="string">":./libs/mongo-hadoop-core-1.5.2.jar"</span></div><div class="line">SPARK_CLASSPATH += <span class="string">":./libs/mongo-java-driver-3.2.2.jar"</span></div><div class="line"><span class="comment"># Add support to access mongo (from stratio) based on casbah libs</span></div><div class="line">SPARK_CLASSPATH += <span class="string">":./libs/casbah-commons_2.10-3.1.1.jar"</span></div><div class="line">SPARK_CLASSPATH += <span class="string">":./libs/casbah-core_2.10-3.1.1.jar"</span></div><div class="line">SPARK_CLASSPATH += <span class="string">":./libs/casbah-query_2.10-3.1.1.jar"</span></div><div class="line">SPARK_CLASSPATH += <span class="string">":./libs/spark-mongodb_2.10-0.11.1.jar"</span></div><div class="line"></div><div class="line"><span class="comment"># Set the environment variable SPARK_CLASSPATH</span></div><div class="line">os.environ[<span class="string">'SPARK_CLASSPATH'</span>] = SPARK_CLASSPATH</div><div class="line"></div><div class="line"><span class="comment"># Add pyspark to sys.path</span></div><div class="line">spark_home = os.environ.get(<span class="string">'SPARK_HOME'</span>, <span class="keyword">None</span>)</div><div class="line">sys.path.insert(<span class="number">0</span>, spark_home + <span class="string">"/python"</span>)</div><div class="line"></div><div class="line"><span class="comment"># Add the py4j to the path.</span></div><div class="line"><span class="comment"># You may need to change the version number to match your install</span></div><div class="line">sys.path.insert(<span class="number">0</span>, os.path.join(spark_home, <span class="string">'python/lib/py4j-0.9-src.zip'</span>))</div><div class="line"></div><div class="line"><span class="keyword">from</span> pyspark <span class="keyword">import</span> SparkContext</div><div class="line"><span class="keyword">from</span> pyspark <span class="keyword">import</span> SparkConf</div><div class="line"><span class="keyword">from</span> pyspark.sql <span class="keyword">import</span> SQLContext</div><div class="line"></div><div class="line"><span class="comment"># Initialize spark conf/context/sqlContext</span></div><div class="line">conf = SparkConf().setMaster(<span class="string">"local[*]"</span>).setAppName(<span class="string">'spark-etl'</span>)</div><div class="line">sc = SparkContext(conf=conf)</div><div class="line">sqlContext = SQLContext(sc)</div></pre></td></tr></table></figure>
+<h3 id="Initial-Data-Access-Drivers-Mysql-Mongo-…"><a href="#Initial-Data-Access-Drivers-Mysql-Mongo-…" class="headerlink" title="Initial Data Access Drivers (Mysql/Mongo/…)"></a>Initial Data Access Drivers (Mysql/Mongo/…)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 1. Initialize the mysql driver</span></div><div class="line">mysql_host = <span class="string">"YOUR_MYSQL_HOST"</span></div><div class="line">mysql_port = <span class="number">3306</span></div><div class="line">mysql_db = <span class="string">"YOUR_MYSQL_DB"</span></div><div class="line">mysql_user = <span class="string">"YOUR_MYSQL_USER"</span></div><div class="line">mysql_pass = <span class="string">"YOUR_MYSQL_PASS"</span></div><div class="line">mysql_driver = <span class="string">"com.mysql.jdbc.Driver"</span></div><div class="line"></div><div class="line">mysql_prod = sqlContext.read.format(<span class="string">"jdbc"</span>).options(</div><div class="line">    url=<span class="string">"jdbc:mysql://&#123;host&#125;:&#123;port&#125;/&#123;db&#125;"</span>.format(host=mysql_host, port=mysql_port, db=mysql_db),</div><div class="line">    driver = mysql_driver,</div><div class="line">    user=mysql_user,</div><div class="line">    password=mysql_pass)</div><div class="line"></div><div class="line"><span class="comment"># 2. Initalize the official mongo driver</span></div><div class="line">mongo_user = <span class="string">"YOUR_MONGO_USER"</span></div><div class="line">mongo_pass = <span class="string">"YOUR_MONGO_PASSWORD"</span></div><div class="line">mongo_host = <span class="string">"127.0.0.1"</span></div><div class="line">mongo_port = <span class="number">27017</span></div><div class="line">mongo_db = <span class="string">"test"</span></div></pre></td></tr></table></figure>
+<h3 id="Register-Temporary-Tables-from-datasources-Mysql-Mongo-…"><a href="#Register-Temporary-Tables-from-datasources-Mysql-Mongo-…" class="headerlink" title="Register Temporary Tables from datasources (Mysql/Mongo/…)"></a>Register Temporary Tables from datasources (Mysql/Mongo/…)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 1. Register mysql temporary tables</span></div><div class="line">df_deal = mysql_prod.load(dbtable = <span class="string">"YOUR_MYSQL_TABLE"</span>)</div><div class="line">df_deal.registerTempTable(<span class="string">"mysql_table"</span>)</div><div class="line"></div><div class="line"><span class="comment"># 2. Register mongo temporary tables</span></div><div class="line">sqlContext.sql(<span class="string">"CREATE TEMPORARY TABLE mongo_table USING com.stratio.datasource.mongodb OPTIONS (host '&#123;host&#125;:&#123;port&#125;', database '&#123;db&#125;', collection '&#123;table&#125;')"</span>.format(</div><div class="line">    host=mongo_host,</div><div class="line">    port=mongo_port,</div><div class="line">    db=mongo_db,</div><div class="line">    table=<span class="string">"demotbl"</span></div><div class="line">))</div></pre></td></tr></table></figure>
+<p>Then We can use SparkSQL as follows:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">df_mongo = sqlContext.sql(<span class="string">"SELECT * FROM mongo_table limit 10"</span>)</div><div class="line">df_mongo.collect()</div></pre></td></tr></table></figure>
+<h2 id="Approach-3-OLAP-SQL-Database-on-SparkSQL-Thrift"><a href="#Approach-3-OLAP-SQL-Database-on-SparkSQL-Thrift" class="headerlink" title="Approach-3: OLAP SQL Database on SparkSQL Thrift"></a>Approach-3: OLAP SQL Database on SparkSQL Thrift</h2><p>We take our step furthermore, we want to make our platform as a <strong>database</strong>, facilitate us to access it in our program via JDBC driver, and to support different legacy BI application (e.g., Tableau, QlikView).</p>
+<p>As mentioned above, SparkSQL can use Hive metastore directly. Thus, we want to start the SparkSQL thriftserver accompy with Hive metastore service, establish the environment with some SparkSQL DDL statements to create the <code>symbol-links</code> to external datasources.</p>
+<p>The work is also very easy, just share the same hive-site.xml between Hive metastore service and SparkSQL thriftserver. We post the content of hive-site.xml as follows. It’s only a toy settings without any Hadoop/HDFS/Mapreduce stuff to highlight the key points, you can adapt it quickly for production use.</p>
+<h3 id="Config-hive-site-xml"><a href="#Config-hive-site-xml" class="headerlink" title="Config hive-site.xml"></a>Config hive-site.xml</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionURL<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>jdbc:mysql://localhost:3306/hive?createDatabaseIfNotExist=true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>JDBC connect string for a JDBC metastore<span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionDriverName<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>com.mysql.jdbc.Driver<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>Driver class name for a JDBC metastore<span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionUserName<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>hive<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>username to use against metastore database<span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionPassword<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>Bh@840922<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>password to use against metastore database<span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.metastore.uris<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>thrift://localhost:9083<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>Thrift URI for the remote metastore. Used by metastore client to connect to remote metastore.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.server2.thrift.port<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>10000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.server2.thrift.bind.host<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>localhost<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="Start-the-SparkSQL-thriftserver-with-required-jars"><a href="#Start-the-SparkSQL-thriftserver-with-required-jars" class="headerlink" title="Start the SparkSQL thriftserver with required jars"></a>Start the SparkSQL thriftserver with required jars</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"></div><div class="line"><span class="variable">$&#123;SPARK_HOME&#125;</span>/sbin/start-thriftserver.sh \</div><div class="line">  --jars <span class="variable">$&#123;WORKDIR&#125;</span>/libs/mongo-java-driver-3.2.2.jar, \</div><div class="line">  <span class="variable">$&#123;WORKDIR&#125;</span>/libs/casbah-commons_2.10-3.1.1.jar, \</div><div class="line">  <span class="variable">$&#123;WORKDIR&#125;</span>/libs/casbah-core_2.10-3.1.1.jar, \</div><div class="line">  <span class="variable">$&#123;WORKDIR&#125;</span>/libs/casbah-query_2.10-3.1.1.jar, \</div><div class="line">  <span class="variable">$&#123;WORKDIR&#125;</span>/libs/spark-mongodb_2.10-0.11.1.jar, \</div><div class="line">  <span class="variable">$&#123;WORKDIR&#125;</span>/libs/mysql-connector-java-5.1.38-bin.jar</div></pre></td></tr></table></figure>
+<p>OK, everything is done! Now you can do the same thing as approach-2 to create a symbol-link to external mongo table as follows in your beeline client:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TEMPORARY</span> <span class="keyword">TABLE</span> mongo_table <span class="keyword">USING</span> com.stratio.datasource.mongodb OPTIONS (host <span class="string">'localhost:27017'</span>, <span class="keyword">database</span> <span class="string">'test'</span>, collection <span class="string">'demotbl'</span>);</div></pre></td></tr></table></figure>
+<p>Then you can access it via normal query statement:</p>
+<pre>
+0: jdbc:hive2://localhost:10000> show tables;
++--------------+--------------+--+
+|  tableName   | isTemporary  |
++--------------+--------------+--+
+| mongo_table  | false        |
++--------------+--------------+--+
+1 row selected (0.108 seconds)
+0: jdbc:hive2://localhost:10000> select * from mongo_table;
++------+----+---------------------------+--+
+|  x   | y  |            _id            |
++------+----+---------------------------+--+
+| 1.0  | a  | 5715f227d2f82889971df7f1  |
+| 2.0  | b  | 57170b5e582cb370c48f085c  |
++------+----+---------------------------+--+
+2 rows selected (0.38 seconds)
+</pre>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/02/24/2016-02-24-jvm-gc-related-stuff/" itemprop="url">
+                  JVM GC related stuff
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-24T17:00:00+08:00" content="2016-02-24">
+              2016-02-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Some good tutorials I have read, maybe translate them in futher.</p>
+<p><a href="http://javapapers.com/java/java-garbage-collection-introduction/" target="_blank" rel="external">http://javapapers.com/java/java-garbage-collection-introduction/</a></p>
+<p><a href="http://www.cubrid.org/blog/tags/Garbage%20Collection/" target="_blank" rel="external">http://www.cubrid.org/blog/tags/Garbage%20Collection/</a></p>
+<p><a href="http://www.javaworld.com/article/2078623/core-java/jvm-performance-optimization-part-1-a-jvm-technology-primer.html" target="_blank" rel="external">http://www.javaworld.com/article/2078623/core-java/jvm-performance-optimization-part-1-a-jvm-technology-primer.html</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/02/24/2016-02-24-scala-features-to-best-practices-5-implicits/" itemprop="url">
+                  scala features to best practices [5]: implicits
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-24T15:00:00+08:00" content="2016-02-24">
+              2016-02-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Implicit conversions and implicit parameters are Scala’s power tools that do useful work behind the scenes. With implicits, you can provide elegant libraries that hide tedious details from library users.</p>
+<h2 id="FT-6-implicit-conversion-via-implicit-method-class"><a href="#FT-6-implicit-conversion-via-implicit-method-class" class="headerlink" title="FT-6: implicit conversion (via implicit method/class)"></a>FT-6: implicit conversion (via implicit method/class)</h2><p>An implicit conversion from type S to type T is defined by an implicit value which has function type S =&gt; T, or by an implicit method convertible to a value of that type. Implicit conversions are applied in two situations:</p>
+<ul>
+<li>If an expression e is of type S, and S does not conform to the expression’s expected type T.</li>
+<li>In a selection e.m with e of type T, if the selector m does not denote a member of T.</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">implicit</span> <span class="function"><span class="keyword">def</span> <span class="title">double2Int</span></span>(d: <span class="type">Double</span>) = d.toInt</div><div class="line"><span class="keyword">val</span> x: <span class="type">Int</span> = <span class="number">42.0</span></div></pre></td></tr></table></figure>
+<h3 id="SC-6-1-enrich-an-existing-class"><a href="#SC-6-1-enrich-an-existing-class" class="headerlink" title="SC-6-1: enrich an existing class"></a>SC-6-1: enrich an existing class</h3><p>Rather than create a separate library of String utility methods, like a StringUtilities class, you want to add your own behavior(s) to the String class, so you can write code like this:</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"HAL"</span>.increment</div></pre></td></tr></table></figure>
+<p>Instead of this:<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="type">StringUtilities</span>.increment(<span class="string">"HAL"</span>)</div></pre></td></tr></table></figure></p>
+<p>Then we can enrich the String class with an implicit method as follows:</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// define a method named increment in a normal Scala class:</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">StringImprovements</span>(<span class="params">val s: <span class="type">String</span></span>) </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">increment</span> </span>= s.map(c =&gt; (c + <span class="number">1</span>).toChar)</div><div class="line">&#125;</div><div class="line"><span class="comment">// define another method to handle the implicit conversion:</span></div><div class="line"><span class="keyword">implicit</span> <span class="function"><span class="keyword">def</span> <span class="title">stringToString</span></span>(s: <span class="type">String</span>) = <span class="keyword">new</span> <span class="type">StringImprovements</span>(s)</div></pre></td></tr></table></figure>
+<p>When you call <code>increment</code> on a String, which does not has that method at all. Thus, the compiler find the compatible one <code>StringImprovements</code> and convert the string to StringImprovements via the implicit method <code>stringToString</code>, this is the scenario-2 mentioned above.</p>
+<p>Scala 2.10 introduced a new feature called implicit classes. An implicit class is a class marked with the implicit keyword. This keyword makes the class’ primary constructor available for implicit conversions when the class is in scope. This is similar to <code>monkey patching</code> in Ruby, and <code>Meta-Programming</code> in Groovy.</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">implicit</span> <span class="class"><span class="keyword">class</span> <span class="title">StringImprovements</span>(<span class="params">s: <span class="type">String</span></span>) </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">increment</span> </span>= s.map(c =&gt; (c + <span class="number">1</span>).toChar)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>In real-world code, this is just slightly more complicated. According to <a href="http://docs.scala-lang.org/sips/completed/implicit-classes.html" target="_blank" rel="external">SIP-13, Implicit Classes</a></p>
+<blockquote>
+<p>An implicit class must be defined in a scope where method definitions are allowed (not at the top level).</p>
+</blockquote>
+<p>This means that your implicit class must be defined inside a class, object, or package object. You can also check some other restrictions of implicit class here: <a href="http://docs.scala-lang.org/overviews/core/implicit-classes.html" target="_blank" rel="external">http://docs.scala-lang.org/overviews/core/implicit-classes.html</a></p>
+<h2 id="FT-7-implicit-parameter"><a href="#FT-7-implicit-parameter" class="headerlink" title="FT-7: implicit parameter"></a>FT-7: implicit parameter</h2><p>A method with implicit parameters can be applied to arguments just like a normal method. In this case the implicit label has no effect. However, if such a method misses arguments for its implicit parameters, such arguments will be automatically provided.</p>
+<p>The actual arguments that are eligible to be passed to an implicit parameter fall into two categories:</p>
+<ul>
+<li>First, eligible are all identifiers x that can be accessed at the point of the method call without a prefix and that denote an implicit definition or an implicit parameter.</li>
+<li>Second, eligible are also all members of companion modules of the implicit parameter’s type that are labeled implicit.</li>
+</ul>
+<h3 id="SC-7-1-default-parameter-value"><a href="#SC-7-1-default-parameter-value" class="headerlink" title="SC-7-1: default parameter value"></a>SC-7-1: default parameter value</h3><p>Implicits can be used to declare a value to be provided as a default as long as an implicit value is set with in the scope.</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">howMuchCanIMake_?</span></span>(hours: <span class="type">Int</span>)(<span class="keyword">implicit</span> dollarsPerHour: <span class="type">BigDecimal</span>) = dollarsPerHour * hours</div><div class="line"></div><div class="line"><span class="keyword">implicit</span> <span class="keyword">var</span> hourlyRate = <span class="type">BigDecimal</span>(<span class="number">34.00</span>)</div></pre></td></tr></table></figure>
+<p>What’s the advantage this solution takes over the simple default value in parameter definition? The search of implicit value can be taken in the scope of <code>companion object</code>, and thus you can keep the default value <code>private</code> from the caller.</p>
+<h3 id="SC-7-2-implicit-conversion-via-implicit-parameter"><a href="#SC-7-2-implicit-conversion-via-implicit-parameter" class="headerlink" title="SC-7-2: implicit conversion via implicit parameter"></a>SC-7-2: implicit conversion via implicit parameter</h3><p>An implicit function parameter is also usable as an implicit conversion, and it’s more flexible than the traditional solution. Check the following codes:</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">smaller</span></span>[<span class="type">T</span>](a: <span class="type">T</span>, b: <span class="type">T</span>)(<span class="keyword">implicit</span> order: <span class="type">T</span> =&gt; <span class="type">Ordered</span>[<span class="type">T</span>])</div><div class="line">  = <span class="keyword">if</span> (a &lt; b) a <span class="keyword">else</span> b <span class="comment">// Calls order(a) &lt; b if a doesn't have a &lt; operator</span></div></pre></td></tr></table></figure>
+<p>Note that <code>order</code> is a function with a single parameter, is tagged implicit, and has a name that is a single identifier. Therefore, it is an implicit conversion, in addition to being an implicit parameter. So, we can omit the call to order in the body of the function</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/02/24/2016-02-24-scala-features-to-best-practices-4-closure/" itemprop="url">
+                  scala features to best practices [4]: closure
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-24T11:00:00+08:00" content="2016-02-24">
+              2016-02-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="FT-5-closure"><a href="#FT-5-closure" class="headerlink" title="FT-5: closure"></a>FT-5: closure</h2><p>You want to pass a function around like a variable, and while doing so, you want that function to be able to refer to one or more fields that were in the same scope as the function when it was declared.</p>
+<p>In his excellent article, Closures in Ruby, Paul Cantrell states</p>
+<blockquote>
+<p>A closure is a block of code which meets three criteria</p>
+</blockquote>
+<p>He defines the criteria as follows:</p>
+<ol>
+<li>The block of code can be passed around as a value, and</li>
+<li>It can be executed on demand by anyone who has that value, at which time</li>
+<li>It can refer to variables from the context in which it was created (i.e., it is closed with respect to variable access, in the mathematical sense of the word “closed”).</li>
+</ol>
+<p>Scala Cookbook, give a more graphic metaphor:</p>
+<blockquote>
+<p>I like to think of a closure as being like <code>quantum entanglement</code>, which Ein‐ stein referred to as “a spooky action at a distance.” Just as quantum entanglement begins with two elements that are together and then separated—but somehow remain aware of each other—a closure begins with a function and a variable defined in the same scope, which are then separated from each other. When the function is executed at some other point in space (scope) and time, it is magically still aware of the variable it referenced in their earlier time together, and even picks up any changes to that variable.</p>
+</blockquote>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> votingAge = <span class="number">18</span></div><div class="line"><span class="keyword">val</span> isOfVotingAge = (age: <span class="type">Int</span>) =&gt; age &gt;= votingAge</div><div class="line"></div><div class="line">isOfVotingAge(<span class="number">16</span>) <span class="comment">// false</span></div><div class="line">isOfVotingAge(<span class="number">20</span>) <span class="comment">// true</span></div><div class="line"></div><div class="line"><span class="comment">// change votingAge in one scope</span></div><div class="line">votingAge = <span class="number">21</span></div><div class="line"><span class="comment">// the change to votingAge affects the result</span></div><div class="line">printResult(isOfVotingAge, <span class="number">20</span>) <span class="comment">// now false</span></div><div class="line"></div><div class="line"><span class="comment">// `printResult` and `votingAge` can be far from each other in a light year</span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/02/24/2016-02-24-scala-features-to-best-practices-3-case-class/" itemprop="url">
+                  scala features to best practices [3]: case class
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-24T10:00:00+08:00" content="2016-02-24">
+              2016-02-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="FT-4-case-class"><a href="#FT-4-case-class" class="headerlink" title="FT-4: case class"></a>FT-4: case class</h2><h3 id="SC-4-1-build-boilerplate-code"><a href="#SC-4-1-build-boilerplate-code" class="headerlink" title="SC-4-1: build boilerplate code"></a>SC-4-1: build boilerplate code</h3><p>You’re working with match expressions, actors, or other situations where you want to use the case class syntax to generate boilerplate code, including accessor and mutator methods, along with apply, unapply, toString, equals, and hashCode methods, and more.</p>
+<p>Define your class as a case class, defining any parameters it needs in its constructor</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// name and relation are 'val' by default</span></div><div class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span>(<span class="params">name: <span class="type">String</span>, relation: <span class="type">String</span></span>)</span></div></pre></td></tr></table></figure>
+<p>Defining a class as a case class results in a lot of boilerplate code being generated, with the following benefits:</p>
+<ul>
+<li>An apply method is generated, so you don’t need to use the new keyword to create a new instance of the class.</li>
+<li>Accessor methods are generated for the constructor parameters because case class constructor parameters are val by default. Mutator methods are also generated for parameters declared as var.</li>
+<li>A good, default toString method is generated.</li>
+<li>An unapply method is generated, making it easy to use case classes in match expressions.</li>
+<li>equals and hashCode methods are generated.</li>
+<li>A copy method is generated.</li>
+</ul>
+<h3 id="SC-4-2-pattern-match-via-constructor-pattern"><a href="#SC-4-2-pattern-match-via-constructor-pattern" class="headerlink" title="SC-4-2: pattern match via constructor pattern"></a>SC-4-2: pattern match via constructor pattern</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">trait</span> <span class="title">Animal</span></span></div><div class="line"></div><div class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Dog</span>(<span class="params">name: <span class="type">String</span></span>) <span class="keyword">extends</span> <span class="title">Animal</span></span></div><div class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Cat</span>(<span class="params">name: <span class="type">String</span></span>) <span class="keyword">extends</span> <span class="title">Animal</span></span></div><div class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">object</span> <span class="title">Woodpecker</span> <span class="keyword">extends</span> <span class="title">Animal</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">CaseClassTest</span> <span class="keyword">extends</span> <span class="title">App</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">determineType</span></span>(x: <span class="type">Animal</span>): <span class="type">String</span> = x <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> <span class="type">Dog</span>(moniker) =&gt; <span class="string">"Got a Dog, name = "</span> + moniker</div><div class="line">    <span class="keyword">case</span> _:<span class="type">Cat</span> =&gt; <span class="string">"Got a Cat (ignoring the name)"</span></div><div class="line">    <span class="keyword">case</span> <span class="type">Woodpecker</span> =&gt; <span class="string">"That was a Woodpecker"</span></div><div class="line">    <span class="keyword">case</span> _ =&gt; <span class="string">"That was something else"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/02/23/2016-02-23-scala-features-to-best-practices-2-companion-object/" itemprop="url">
+                  Scala features to best practices [2]: companion object
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-23T00:00:00+08:00" content="2016-02-23">
+              2016-02-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="FT-3-companion-object"><a href="#FT-3-companion-object" class="headerlink" title="FT-3: companion object"></a>FT-3: companion object</h2><p>Define nonstatic (instance) members in your class, and define members that you want to appear as “static” members in an object that has the same name as the class, and is in the same file as the class. This object is known as a <code>companion object</code>.</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Pizza class</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pizza</span> (<span class="params">var crustType: <span class="type">String</span></span>) </span>&#123;</div><div class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">toString</span> </span>= <span class="string">"Crust type is "</span> + crustType</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// companion object</span></div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">Pizza</span> </span>&#123;</div><div class="line">  <span class="keyword">val</span> <span class="type">CRUST_TYPE_THIN</span> = <span class="string">"thin"</span></div><div class="line">  <span class="keyword">val</span> <span class="type">CRUST_TYPE_THICK</span> = <span class="string">"thick"</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">getFoo</span> </span>= <span class="string">"Foo"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Although this approach is different than Java, the recipe is straightforward:</p>
+<ul>
+<li>Define your class and object in the same file, giving them the same name.</li>
+<li>Define members that should appear to be “static” in the object.</li>
+<li>Define nonstatic (instance) members in the class.</li>
+</ul>
+<h3 id="SC-3-1-accessing-private-members"><a href="#SC-3-1-accessing-private-members" class="headerlink" title="SC-3-1: accessing private members"></a>SC-3-1: accessing private members</h3><p>It’s also important to know that a class and its companion object can access each other’s private members. In the following code, the “static” method double in the object can access the private variable secret of the class Foo:</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> <span class="keyword">val</span> secret = <span class="number">2</span></div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">Foo</span> </span>&#123;</div><div class="line">  <span class="comment">// access the private class field 'secret'</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">double</span></span>(foo: <span class="type">Foo</span>) = foo.secret * <span class="number">2</span></div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">Driver</span> <span class="keyword">extends</span> <span class="title">App</span> </span>&#123;</div><div class="line">  <span class="keyword">val</span> f = <span class="keyword">new</span> <span class="type">Foo</span> println(<span class="type">Foo</span>.double(f)) <span class="comment">// prints 4</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Similarly, in the following code, the instance member printObj can access the private field obj of the object Foo:</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</div><div class="line">  <span class="comment">// access the private object field 'obj'</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">printObj</span> </span>&#123; println(<span class="string">s"I can see <span class="subst">$&#123;Foo.obj&#125;</span>"</span>) &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">Foo</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> <span class="keyword">val</span> obj = <span class="string">"Foo's object"</span></div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">Driver</span> <span class="keyword">extends</span> <span class="title">App</span> </span>&#123;</div><div class="line">  <span class="keyword">val</span> f = <span class="keyword">new</span> <span class="type">Foo</span></div><div class="line">  f.printObj</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="SC-3-2-private-primary-constructor"><a href="#SC-3-2-private-primary-constructor" class="headerlink" title="SC-3-2: private primary constructor"></a>SC-3-2: private primary constructor</h3><p>A simple way to enforce the Singleton pattern in Scala is to make the primary constructor private, then put a getInstance method in the companion object of the class:</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Brain</span> <span class="title">private</span> </span>&#123;</div><div class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">toString</span> </span>= <span class="string">"This is the brain."</span></div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">Brain</span> </span>&#123;</div><div class="line">  <span class="keyword">val</span> brain = <span class="keyword">new</span> <span class="type">Brain</span> <span class="function"><span class="keyword">def</span> <span class="title">getInstance</span> </span>= brain</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">SingletonTest</span> <span class="keyword">extends</span> <span class="title">App</span> </span>&#123;</div><div class="line">  <span class="comment">// this won't compile</span></div><div class="line">  <span class="comment">// val brain = new Brain</span></div><div class="line"></div><div class="line">  <span class="comment">// this works</span></div><div class="line">  <span class="keyword">val</span> brain = <span class="type">Brain</span>.getInstance</div><div class="line">      println(brain)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="SC-3-3-creating-instances-without-new-keyword"><a href="#SC-3-3-creating-instances-without-new-keyword" class="headerlink" title="SC-3-3: creating instances without new keyword"></a>SC-3-3: creating instances without <code>new</code> keyword</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">  <span class="keyword">var</span> name: <span class="type">String</span> = _</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">Person</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>(name: <span class="type">String</span>): <span class="type">Person</span> = &#123;</div><div class="line">    <span class="keyword">var</span> p = <span class="keyword">new</span> <span class="type">Person</span> p.name = name</div><div class="line">    p</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>The <code>apply</code> method in a companion object is treated specially by the Scala compiler and lets you create new instances of your class without requiring the new keyword.</p>
+<p>The problem can also be addressed by declaring your class as a <code>case class</code>. This works because the case class generates an apply method in a companion object for you. However, it’s important to know that a case class creates much more code for you than just the apply method. </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/02/22/2016-02-22-xiaomei-bi-design/" itemprop="url">
+                  xiaomei BI design
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-22T00:00:00+08:00" content="2016-02-22">
+              2016-02-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/bigdata/" itemprop="url" rel="index">
+                    <span itemprop="name">bigdata</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="submodule"><a href="#submodule" class="headerlink" title="submodule"></a>submodule</h2><ul>
+<li>schema service (readlonly)<ul>
+<li>scan a s pecified driver url to load a bunch of schemas</li>
+<li>manually create a schema</li>
+<li>query the schema types</li>
+<li>guess the schema of some schemaless datastore</li>
+</ul>
+</li>
+<li>report service<ul>
+<li>a store system of widget</li>
+<li>layout placeholder</li>
+</ul>
+</li>
+<li>analyse service<ul>
+<li>workflow view</li>
+<li>schema view</li>
+<li>publish servicei</li>
+</ul>
+</li>
+</ul>
+<h2 id="Concepts"><a href="#Concepts" class="headerlink" title="Concepts"></a>Concepts</h2><p>a dataframe can be modeled as a sequence of transformations closure over an init <em>raw</em> dataframe</p>
+<p>the sequence os ops can be lazily computed and any dataframe can be specified as a snapshot at a position</p>
+<p>the data-content of the frame can only be generated by computed along the sequence, but the schema of the dataframe can be deduced </p>
+<p>widget includes:</p>
+<ul>
+<li>config:<ul>
+<li>schema-key (from schema service)</li>
+<li>access-rule</li>
+<li>parameters</li>
+<li>query</li>
+</ul>
+</li>
+<li>front-end:<ul>
+<li>JS (data-access api)</li>
+<li>CSS</li>
+<li>resources</li>
+</ul>
+</li>
+</ul>
+<h2 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h2><ol>
+<li>to add</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/02/22/2016-02-22-scala-features-to-best-practices-1-delayed-evaluation/" itemprop="url">
+                  Scala features to best practices [1]: delayed evaluation
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-02-22T00:00:00+08:00" content="2016-02-22">
+              2016-02-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="features-delayed-evaluation"><a href="#features-delayed-evaluation" class="headerlink" title="features: delayed evaluation"></a>features: delayed evaluation</h2><p>I’d like to use the term <code>delayed evaluation</code> to cover following two features in scala: <code>lazy var/val</code> and <code>byname parameter</code>. They are not quite related to each other, but both are to postpone the evaluation of a given expression or block for the final result.</p>
+<h2 id="FT-1-lazy-var-val"><a href="#FT-1-lazy-var-val" class="headerlink" title="FT-1: lazy var/val"></a>FT-1: lazy var/val</h2><p>Defining a field as <code>lazy</code> is a useful approach when the field might not be accessed in the normal processing of your algorithms, or if running the algorithm will take a long time, and you want to defer that to a later time.</p>
+<p>At present, I think its useful in following scenarios:</p>
+<h3 id="SC-1-1-field-initialization-takes-great-efforts"><a href="#SC-1-1-field-initialization-takes-great-efforts" class="headerlink" title="SC-1-1: field-initialization takes great efforts"></a>SC-1-1: field-initialization takes great efforts</h3><p>It makes sense to use <code>lazy</code> on a class field if its initialization requires a long time to run, and we don’t want to do the job when we instantiate the class until we actually use the field.</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</div><div class="line">  <span class="keyword">lazy</span> <span class="keyword">val</span> text = io.<span class="type">Source</span>.fromFile(<span class="string">"/etc/passwd"</span>).getLines.foreach(println)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">Test</span> <span class="keyword">extends</span> <span class="title">App</span> </span>&#123;</div><div class="line">  <span class="keyword">val</span> f = <span class="keyword">new</span> <span class="type">Foo</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>In above example, the initialization of <code>text</code> needs to retrieve the contents of the text file <code>/etc/passwd</code>. But when this code is compiled and run, there is no output, because the text field isn’t initialized until it’s accessed. That’s how a lazy field works.</p>
+<h3 id="SC-1-2-field-initialization-has-dependencies"><a href="#SC-1-2-field-initialization-has-dependencies" class="headerlink" title="SC-1-2: field-initialization has dependencies"></a>SC-1-2: field-initialization has dependencies</h3><p>Sometimes we need to initialize fields in a specific order because they have dependency on the other. Then we may produce following ugly codes:</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SparkStreamDemo</span> <span class="keyword">extends</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line"></div><div class="line">  <span class="meta">@transient</span> <span class="keyword">private</span> <span class="keyword">var</span> conf: <span class="type">SparkConf</span> = <span class="literal">null</span></div><div class="line">  <span class="meta">@transient</span> <span class="keyword">private</span> <span class="keyword">var</span> sc: <span class="type">SparkContext</span> = <span class="literal">null</span></div><div class="line">  <span class="meta">@transient</span> <span class="keyword">private</span> <span class="keyword">var</span> ssc: <span class="type">StreamingContext</span> = <span class="literal">null</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">getConf</span></span>() = &#123;</div><div class="line">    <span class="keyword">if</span> (conf == <span class="literal">null</span>)</div><div class="line">      conf = <span class="keyword">new</span> <span class="type">SparkConf</span>()</div><div class="line">    conf</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">getSC</span></span>() = &#123;</div><div class="line">    <span class="keyword">if</span> (sc == <span class="literal">null</span>)</div><div class="line">      sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(getConf)</div><div class="line">    sc</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">getSSC</span></span>() = &#123;</div><div class="line">    <span class="keyword">if</span> (ssc == <span class="literal">null</span>)</div><div class="line">      ssc = <span class="keyword">new</span> <span class="type">StreamingContext</span>(getSC, <span class="type">Seconds</span>(<span class="number">10</span>))</div><div class="line">    ssc</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>In this spark-streaming demo, the initialization of <code>ssc</code> depends on that of <code>sc</code>, which further depends on <code>conf</code>. We operate the initialize manually, thus we define these fields with <code>var</code>, and implement the lazy initialization in getters. The shortcoming is obvious, we have to restrict the access of these field through getters, otherwise we may get the null-valued ones! Moreover, defining <code>var</code> to these fields is not best-practice since they are readonly after initialization. A modified version via <code>lazy val/var</code> is as follows:</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SparkStreamDemo</span> <span class="keyword">extends</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line">  <span class="meta">@transient</span> <span class="keyword">lazy</span> <span class="keyword">val</span> conf: <span class="type">SparkConf</span> = <span class="keyword">new</span> <span class="type">SparkConf</span>()</div><div class="line">  <span class="meta">@transient</span> <span class="keyword">lazy</span> <span class="keyword">val</span> sc: <span class="type">SparkContext</span> = <span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</div><div class="line">  <span class="meta">@transient</span> <span class="keyword">lazy</span> <span class="keyword">val</span> ssc: <span class="type">StreamingContext</span> = <span class="keyword">new</span> <span class="type">StreamingContext</span>(sc, <span class="type">Seconds</span>(<span class="number">10</span>))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>What if a <code>lazy</code> field depends on a <code>non-lazy</code> var, which is not properly initialzed? Can the instance be re-used after some <code>NullPointerException</code>-like error raised? This seems no problem as scala provides a tricky, as @ViktorKlang posted on Twitter:</p>
+<blockquote>
+<p>Little known Scala fact: if the initialization of a lazy val throws an exception, it will attempt to reinitialize the val at next access.</p>
+</blockquote>
+<p>You can check the details here: <a href="http://scalapuzzlers.com/#pzzlr-012" target="_blank" rel="external">http://scalapuzzlers.com/#pzzlr-012</a></p>
+<h2 id="FT-2-by-name-parameter"><a href="#FT-2-by-name-parameter" class="headerlink" title="FT-2: by-name parameter"></a>FT-2: by-name parameter</h2><p>The by-name parameter can be considered equivalent to <code>() =&gt; Int</code>, which is a <code>Function type</code> that takes a Unit type argument. Besides from normal functions, it can also be used with an <code>Object</code> and <code>apply</code> to make interesting block-like calls.</p>
+<h3 id="SC-2-1-wrapper-function"><a href="#SC-2-1-wrapper-function" class="headerlink" title="SC-2-1: wrapper function"></a>SC-2-1: wrapper function</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// A benchmark construct:</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">benchmark</span> </span>(body : =&gt; <span class="type">Unit</span>) : <span class="type">Long</span> = &#123;</div><div class="line">  <span class="keyword">val</span> start = java.util.<span class="type">Calendar</span>.getInstance().getTimeInMillis()</div><div class="line">  body</div><div class="line">  <span class="keyword">val</span> end = java.util.<span class="type">Calendar</span>.getInstance().getTimeInMillis()</div><div class="line">  end - start</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">val</span> time = benchmark &#123;</div><div class="line">  <span class="keyword">var</span> i = <span class="number">0</span> ;</div><div class="line">  <span class="keyword">while</span> (i &lt; <span class="number">1000000</span>) &#123;</div><div class="line">    i += <span class="number">1</span> ;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">println(<span class="string">"while took:   "</span> + time)</div></pre></td></tr></table></figure>
+<h3 id="SC-2-2-Add-syntactic-sugar"><a href="#SC-2-2-Add-syntactic-sugar" class="headerlink" title="SC-2-2: Add syntactic sugar"></a>SC-2-2: Add syntactic sugar</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// While loops are syntactic sugar in Scala:</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">myWhile</span> </span>(cond : =&gt; <span class="type">Boolean</span>) (body : =&gt; <span class="type">Unit</span>) : <span class="type">Unit</span> =</div><div class="line">  <span class="keyword">if</span> (cond) &#123; body ; myWhile (cond) (body) &#125; <span class="keyword">else</span> ()</div><div class="line"></div><div class="line"><span class="keyword">var</span> i = <span class="number">0</span> ;</div><div class="line"></div><div class="line">myWhile (i &lt; <span class="number">4</span>) &#123; i += <span class="number">1</span> ; println (i) &#125;</div></pre></td></tr></table></figure>
+<p>Accompany with <code>curry</code>, we re-implement a while-loop in above example.</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+  </section>
+
+  
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://img1.bimg.126.net/photo/Rm9TcTLaV0KuXDr36fyNNg==/1737263556258260335.jpg"
+               alt="bailaohe" />
+          <p class="site-author-name" itemprop="name">bailaohe</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bailaohe</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://yoursite.com/2017/07/29/tikv-0-prepare/</loc>
+    
+    <lastmod>2017-08-03T04:16:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2017/07/28/rust-features/</loc>
+    
+    <lastmod>2017-07-28T13:13:01.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/02/24/2016-02-24-scala-features-to-best-practices-5-implicits/</loc>
+    
+    <lastmod>2016-12-03T08:32:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/02/24/2016-02-24-scala-features-to-best-practices-3-case-class/</loc>
+    
+    <lastmod>2016-12-03T08:32:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/02/22/2016-02-22-scala-features-to-best-practices-1-delayed-evaluation/</loc>
+    
+    <lastmod>2016-12-03T08:32:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/02/24/2016-02-24-scala-features-to-best-practices-4-closure/</loc>
+    
+    <lastmod>2016-12-03T08:32:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/02/23/2016-02-23-scala-features-to-best-practices-2-companion-object/</loc>
+    
+    <lastmod>2016-12-03T08:32:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/04/20/Use-SparkSQL-to-build-a-OLAP-database-across-different-datasources/</loc>
+    
+    <lastmod>2016-12-03T08:32:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/02/22/2016-02-22-xiaomei-bi-design/</loc>
+    
+    <lastmod>2016-12-03T08:32:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/02/24/2016-02-24-jvm-gc-related-stuff/</loc>
+    
+    <lastmod>2016-12-03T08:32:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/index.html</loc>
+    
+    <lastmod>2016-12-03T08:32:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/categories/index.html</loc>
+    
+    <lastmod>2016-12-03T08:32:49.000Z</lastmod>
+    
+  </url>
+  
+</urlset>

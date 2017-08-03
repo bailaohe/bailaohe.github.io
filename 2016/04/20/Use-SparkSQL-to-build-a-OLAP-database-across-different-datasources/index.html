@@ -1,0 +1,718 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="bailaohe's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="Spark is a large-scale data processing engine. SparkSQL, one of its important component, can access the Hive metastore service to handle Hive tables directly. Furthermore, SparkSQL also provides appro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Use SparkSQL to build a OLAP database across different datasources">
+<meta property="og:url" content="http://yoursite.com/2016/04/20/Use-SparkSQL-to-build-a-OLAP-database-across-different-datasources/index.html">
+<meta property="og:site_name" content="bailaohe's blog">
+<meta property="og:description" content="Spark is a large-scale data processing engine. SparkSQL, one of its important component, can access the Hive metastore service to handle Hive tables directly. Furthermore, SparkSQL also provides appro">
+<meta property="og:updated_time" content="2016-12-03T08:32:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Use SparkSQL to build a OLAP database across different datasources">
+<meta name="twitter:description" content="Spark is a large-scale data processing engine. SparkSQL, one of its important component, can access the Hive metastore service to handle Hive tables directly. Furthermore, SparkSQL also provides appro">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Use SparkSQL to build a OLAP database across different datasources | bailaohe's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">bailaohe's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Use SparkSQL to build a OLAP database across different datasources
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-20T13:20:35+08:00" content="2016-04-20">
+              2016-04-20
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="http://spark.apache.com" target="_blank" rel="external">Spark</a> is a large-scale data processing engine. <a href="https://spark.apache.org/docs/latest/sql-programming-guide.html" target="_blank" rel="external">SparkSQL</a>, one of its important component, can access the Hive metastore service to handle Hive tables directly. Furthermore, SparkSQL also provides approach to use data from other external datasources (JDBC to RDB, Mongo, HBase, etc).</p>
+<h2 id="Original-Target"><a href="#Original-Target" class="headerlink" title="Original Target"></a>Original Target</h2><p>In my work, I need to handle data from different datasources (mostly Mysql &amp; Mongo) to generate the final OLAP query result. Our goal is to establish a universal data platform to access, especially to process <code>JOIN</code> operation across schema on multiple datasources.</p>
+<h2 id="Approach-1-Pandas-ETL-engine"><a href="#Approach-1-Pandas-ETL-engine" class="headerlink" title="Approach-1: Pandas ETL engine"></a>Approach-1: Pandas ETL engine</h2><p>We originally used <a href="http://pandas.pydata.org/" target="_blank" rel="external">pandas</a> to load required schemas as (pandas) Dataframes and then process all data operations within memory. This approach, however, is</p>
+<ul>
+<li><strong>Time Consuming</strong>: requires great efforts to load dataframes into memory</li>
+<li><strong>Lack of Scalability</strong>: cannot handle large-scale data well since the entire platform is resided in single node.</li>
+<li><strong>Difficult to Access</strong>: needs pandas APIs to process all the data operations. There are methods to use SQL to handle pandas Dataframe (e.g., <a href="https://github.com/keeganmccallum/sql4pandas" target="_blank" rel="external">sql4pandas</a>), but the supported sql syntax is limited.</li>
+</ul>
+<p>At last, we come to Spark. In SparkSQL, the basic operational data unit is also <code>DataFrame</code>, no matter a table in RDB, a collection in MongoDB, or a document in ElasticSearch. Moreover, its <code>lazy evaluation</code> of Dataframe enable it to process ETL job until the time we really need to access it, which makes it efficient in data handling and aware of change of external datasource.</p>
+<h2 id="Approach-2-PySpark-Jupyter-Notebook"><a href="#Approach-2-PySpark-Jupyter-Notebook" class="headerlink" title="Approach-2: PySpark Jupyter Notebook"></a>Approach-2: PySpark Jupyter Notebook</h2><p>The idea is very easy, we register all Dataframes as temporary tables at first. Then we can use sql via Spark SQLContext to operate multiple datasources directly. Its easy to setup the jupyter notebook environment using PySpark. You can check the following demo notebook at my github repository (<a href="https://github.com/bailaohe/spark-notebook" target="_blank" rel="external">here</a>). I post the source code as follows.</p>
+<h3 id="Initialize-pySpark-Environment"><a href="#Initialize-pySpark-Environment" class="headerlink" title="Initialize pySpark Environment"></a>Initialize pySpark Environment</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"></div><div class="line"><span class="comment"># Add support to access mysql</span></div><div class="line">SPARK_CLASSPATH = <span class="string">"./libs/mysql-connector-java-5.1.38-bin.jar"</span></div><div class="line"><span class="comment"># Add support to access mongo (from official)</span></div><div class="line">SPARK_CLASSPATH += <span class="string">":./libs/mongo-hadoop-core-1.5.2.jar"</span></div><div class="line">SPARK_CLASSPATH += <span class="string">":./libs/mongo-java-driver-3.2.2.jar"</span></div><div class="line"><span class="comment"># Add support to access mongo (from stratio) based on casbah libs</span></div><div class="line">SPARK_CLASSPATH += <span class="string">":./libs/casbah-commons_2.10-3.1.1.jar"</span></div><div class="line">SPARK_CLASSPATH += <span class="string">":./libs/casbah-core_2.10-3.1.1.jar"</span></div><div class="line">SPARK_CLASSPATH += <span class="string">":./libs/casbah-query_2.10-3.1.1.jar"</span></div><div class="line">SPARK_CLASSPATH += <span class="string">":./libs/spark-mongodb_2.10-0.11.1.jar"</span></div><div class="line"></div><div class="line"><span class="comment"># Set the environment variable SPARK_CLASSPATH</span></div><div class="line">os.environ[<span class="string">'SPARK_CLASSPATH'</span>] = SPARK_CLASSPATH</div><div class="line"></div><div class="line"><span class="comment"># Add pyspark to sys.path</span></div><div class="line">spark_home = os.environ.get(<span class="string">'SPARK_HOME'</span>, <span class="keyword">None</span>)</div><div class="line">sys.path.insert(<span class="number">0</span>, spark_home + <span class="string">"/python"</span>)</div><div class="line"></div><div class="line"><span class="comment"># Add the py4j to the path.</span></div><div class="line"><span class="comment"># You may need to change the version number to match your install</span></div><div class="line">sys.path.insert(<span class="number">0</span>, os.path.join(spark_home, <span class="string">'python/lib/py4j-0.9-src.zip'</span>))</div><div class="line"></div><div class="line"><span class="keyword">from</span> pyspark <span class="keyword">import</span> SparkContext</div><div class="line"><span class="keyword">from</span> pyspark <span class="keyword">import</span> SparkConf</div><div class="line"><span class="keyword">from</span> pyspark.sql <span class="keyword">import</span> SQLContext</div><div class="line"></div><div class="line"><span class="comment"># Initialize spark conf/context/sqlContext</span></div><div class="line">conf = SparkConf().setMaster(<span class="string">"local[*]"</span>).setAppName(<span class="string">'spark-etl'</span>)</div><div class="line">sc = SparkContext(conf=conf)</div><div class="line">sqlContext = SQLContext(sc)</div></pre></td></tr></table></figure>
+<h3 id="Initial-Data-Access-Drivers-Mysql-Mongo-…"><a href="#Initial-Data-Access-Drivers-Mysql-Mongo-…" class="headerlink" title="Initial Data Access Drivers (Mysql/Mongo/…)"></a>Initial Data Access Drivers (Mysql/Mongo/…)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 1. Initialize the mysql driver</span></div><div class="line">mysql_host = <span class="string">"YOUR_MYSQL_HOST"</span></div><div class="line">mysql_port = <span class="number">3306</span></div><div class="line">mysql_db = <span class="string">"YOUR_MYSQL_DB"</span></div><div class="line">mysql_user = <span class="string">"YOUR_MYSQL_USER"</span></div><div class="line">mysql_pass = <span class="string">"YOUR_MYSQL_PASS"</span></div><div class="line">mysql_driver = <span class="string">"com.mysql.jdbc.Driver"</span></div><div class="line"></div><div class="line">mysql_prod = sqlContext.read.format(<span class="string">"jdbc"</span>).options(</div><div class="line">    url=<span class="string">"jdbc:mysql://&#123;host&#125;:&#123;port&#125;/&#123;db&#125;"</span>.format(host=mysql_host, port=mysql_port, db=mysql_db),</div><div class="line">    driver = mysql_driver,</div><div class="line">    user=mysql_user,</div><div class="line">    password=mysql_pass)</div><div class="line"></div><div class="line"><span class="comment"># 2. Initalize the official mongo driver</span></div><div class="line">mongo_user = <span class="string">"YOUR_MONGO_USER"</span></div><div class="line">mongo_pass = <span class="string">"YOUR_MONGO_PASSWORD"</span></div><div class="line">mongo_host = <span class="string">"127.0.0.1"</span></div><div class="line">mongo_port = <span class="number">27017</span></div><div class="line">mongo_db = <span class="string">"test"</span></div></pre></td></tr></table></figure>
+<h3 id="Register-Temporary-Tables-from-datasources-Mysql-Mongo-…"><a href="#Register-Temporary-Tables-from-datasources-Mysql-Mongo-…" class="headerlink" title="Register Temporary Tables from datasources (Mysql/Mongo/…)"></a>Register Temporary Tables from datasources (Mysql/Mongo/…)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 1. Register mysql temporary tables</span></div><div class="line">df_deal = mysql_prod.load(dbtable = <span class="string">"YOUR_MYSQL_TABLE"</span>)</div><div class="line">df_deal.registerTempTable(<span class="string">"mysql_table"</span>)</div><div class="line"></div><div class="line"><span class="comment"># 2. Register mongo temporary tables</span></div><div class="line">sqlContext.sql(<span class="string">"CREATE TEMPORARY TABLE mongo_table USING com.stratio.datasource.mongodb OPTIONS (host '&#123;host&#125;:&#123;port&#125;', database '&#123;db&#125;', collection '&#123;table&#125;')"</span>.format(</div><div class="line">    host=mongo_host,</div><div class="line">    port=mongo_port,</div><div class="line">    db=mongo_db,</div><div class="line">    table=<span class="string">"demotbl"</span></div><div class="line">))</div></pre></td></tr></table></figure>
+<p>Then We can use SparkSQL as follows:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">df_mongo = sqlContext.sql(<span class="string">"SELECT * FROM mongo_table limit 10"</span>)</div><div class="line">df_mongo.collect()</div></pre></td></tr></table></figure>
+<h2 id="Approach-3-OLAP-SQL-Database-on-SparkSQL-Thrift"><a href="#Approach-3-OLAP-SQL-Database-on-SparkSQL-Thrift" class="headerlink" title="Approach-3: OLAP SQL Database on SparkSQL Thrift"></a>Approach-3: OLAP SQL Database on SparkSQL Thrift</h2><p>We take our step furthermore, we want to make our platform as a <strong>database</strong>, facilitate us to access it in our program via JDBC driver, and to support different legacy BI application (e.g., Tableau, QlikView).</p>
+<p>As mentioned above, SparkSQL can use Hive metastore directly. Thus, we want to start the SparkSQL thriftserver accompy with Hive metastore service, establish the environment with some SparkSQL DDL statements to create the <code>symbol-links</code> to external datasources.</p>
+<p>The work is also very easy, just share the same hive-site.xml between Hive metastore service and SparkSQL thriftserver. We post the content of hive-site.xml as follows. It’s only a toy settings without any Hadoop/HDFS/Mapreduce stuff to highlight the key points, you can adapt it quickly for production use.</p>
+<h3 id="Config-hive-site-xml"><a href="#Config-hive-site-xml" class="headerlink" title="Config hive-site.xml"></a>Config hive-site.xml</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionURL<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>jdbc:mysql://localhost:3306/hive?createDatabaseIfNotExist=true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>JDBC connect string for a JDBC metastore<span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionDriverName<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>com.mysql.jdbc.Driver<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>Driver class name for a JDBC metastore<span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionUserName<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>hive<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>username to use against metastore database<span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>javax.jdo.option.ConnectionPassword<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>Bh@840922<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>password to use against metastore database<span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.metastore.uris<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>thrift://localhost:9083<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>Thrift URI for the remote metastore. Used by metastore client to connect to remote metastore.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.server2.thrift.port<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>10000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.server2.thrift.bind.host<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>localhost<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="Start-the-SparkSQL-thriftserver-with-required-jars"><a href="#Start-the-SparkSQL-thriftserver-with-required-jars" class="headerlink" title="Start the SparkSQL thriftserver with required jars"></a>Start the SparkSQL thriftserver with required jars</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"></div><div class="line"><span class="variable">$&#123;SPARK_HOME&#125;</span>/sbin/start-thriftserver.sh \</div><div class="line">  --jars <span class="variable">$&#123;WORKDIR&#125;</span>/libs/mongo-java-driver-3.2.2.jar, \</div><div class="line">  <span class="variable">$&#123;WORKDIR&#125;</span>/libs/casbah-commons_2.10-3.1.1.jar, \</div><div class="line">  <span class="variable">$&#123;WORKDIR&#125;</span>/libs/casbah-core_2.10-3.1.1.jar, \</div><div class="line">  <span class="variable">$&#123;WORKDIR&#125;</span>/libs/casbah-query_2.10-3.1.1.jar, \</div><div class="line">  <span class="variable">$&#123;WORKDIR&#125;</span>/libs/spark-mongodb_2.10-0.11.1.jar, \</div><div class="line">  <span class="variable">$&#123;WORKDIR&#125;</span>/libs/mysql-connector-java-5.1.38-bin.jar</div></pre></td></tr></table></figure>
+<p>OK, everything is done! Now you can do the same thing as approach-2 to create a symbol-link to external mongo table as follows in your beeline client:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TEMPORARY</span> <span class="keyword">TABLE</span> mongo_table <span class="keyword">USING</span> com.stratio.datasource.mongodb OPTIONS (host <span class="string">'localhost:27017'</span>, <span class="keyword">database</span> <span class="string">'test'</span>, collection <span class="string">'demotbl'</span>);</div></pre></td></tr></table></figure>
+<p>Then you can access it via normal query statement:</p>
+<pre>
+0: jdbc:hive2://localhost:10000> show tables;
++--------------+--------------+--+
+|  tableName   | isTemporary  |
++--------------+--------------+--+
+| mongo_table  | false        |
++--------------+--------------+--+
+1 row selected (0.108 seconds)
+0: jdbc:hive2://localhost:10000> select * from mongo_table;
++------+----+---------------------------+--+
+|  x   | y  |            _id            |
++------+----+---------------------------+--+
+| 1.0  | a  | 5715f227d2f82889971df7f1  |
+| 2.0  | b  | 57170b5e582cb370c48f085c  |
++------+----+---------------------------+--+
+2 rows selected (0.38 seconds)
+</pre>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/02/24/2016-02-24-jvm-gc-related-stuff/" rel="next" title="JVM GC related stuff">
+                <i class="fa fa-chevron-left"></i> JVM GC related stuff
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/28/rust-features/" rel="prev" title="rust中的一些要点">
+                rust中的一些要点 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://img1.bimg.126.net/photo/Rm9TcTLaV0KuXDr36fyNNg==/1737263556258260335.jpg"
+               alt="bailaohe" />
+          <p class="site-author-name" itemprop="name">bailaohe</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Original-Target"><span class="nav-number">1.</span> <span class="nav-text">Original Target</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Approach-1-Pandas-ETL-engine"><span class="nav-number">2.</span> <span class="nav-text">Approach-1: Pandas ETL engine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Approach-2-PySpark-Jupyter-Notebook"><span class="nav-number">3.</span> <span class="nav-text">Approach-2: PySpark Jupyter Notebook</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Initialize-pySpark-Environment"><span class="nav-number">3.1.</span> <span class="nav-text">Initialize pySpark Environment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Initial-Data-Access-Drivers-Mysql-Mongo-…"><span class="nav-number">3.2.</span> <span class="nav-text">Initial Data Access Drivers (Mysql/Mongo/…)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Register-Temporary-Tables-from-datasources-Mysql-Mongo-…"><span class="nav-number">3.3.</span> <span class="nav-text">Register Temporary Tables from datasources (Mysql/Mongo/…)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Approach-3-OLAP-SQL-Database-on-SparkSQL-Thrift"><span class="nav-number">4.</span> <span class="nav-text">Approach-3: OLAP SQL Database on SparkSQL Thrift</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Config-hive-site-xml"><span class="nav-number">4.1.</span> <span class="nav-text">Config hive-site.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Start-the-SparkSQL-thriftserver-with-required-jars"><span class="nav-number">4.2.</span> <span class="nav-text">Start the SparkSQL thriftserver with required jars</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bailaohe</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

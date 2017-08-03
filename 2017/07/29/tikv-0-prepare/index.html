@@ -1,0 +1,771 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="rust,tikv," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="bailaohe's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="最近一段时间，非常关注tidb这个开源项目。个人感觉，这个项目和蚂蚁的OceanBase是从两个层次，尝试从数据库层面上解决应用扩展的痛点。前者关注金融级应用，因此更强调跨数据中心的实物一致性和高可用；后者相比之下更为“亲民”，作为一个后端程序员，能够有朝一日将一切持久化的扩展问题都交给数据库，开发一套业务代码，能够在几十到几十万并发访问下“平趟”，是件多爽的事！
+不过羞羞地说，眼下对tidb存储">
+<meta property="og:type" content="article">
+<meta property="og:title" content="跟着tikv源码学rust-0：开篇和准备">
+<meta property="og:url" content="http://yoursite.com/2017/07/29/tikv-0-prepare/index.html">
+<meta property="og:site_name" content="bailaohe's blog">
+<meta property="og:description" content="最近一段时间，非常关注tidb这个开源项目。个人感觉，这个项目和蚂蚁的OceanBase是从两个层次，尝试从数据库层面上解决应用扩展的痛点。前者关注金融级应用，因此更强调跨数据中心的实物一致性和高可用；后者相比之下更为“亲民”，作为一个后端程序员，能够有朝一日将一切持久化的扩展问题都交给数据库，开发一套业务代码，能够在几十到几十万并发访问下“平趟”，是件多爽的事！
+不过羞羞地说，眼下对tidb存储">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1fi41ibf0kqj30t3085mys.jpg">
+<meta property="og:updated_time" content="2017-08-03T04:16:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="跟着tikv源码学rust-0：开篇和准备">
+<meta name="twitter:description" content="最近一段时间，非常关注tidb这个开源项目。个人感觉，这个项目和蚂蚁的OceanBase是从两个层次，尝试从数据库层面上解决应用扩展的痛点。前者关注金融级应用，因此更强调跨数据中心的实物一致性和高可用；后者相比之下更为“亲民”，作为一个后端程序员，能够有朝一日将一切持久化的扩展问题都交给数据库，开发一套业务代码，能够在几十到几十万并发访问下“平趟”，是件多爽的事！
+不过羞羞地说，眼下对tidb存储">
+<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1fi41ibf0kqj30t3085mys.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 跟着tikv源码学rust-0：开篇和准备 | bailaohe's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">bailaohe's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                跟着tikv源码学rust-0：开篇和准备
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-07-29T00:28:37+08:00" content="2017-07-29">
+              2017-07-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index">
+                    <span itemprop="name">programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近一段时间，非常关注tidb这个开源项目。个人感觉，这个项目和蚂蚁的OceanBase是从两个层次，尝试从数据库层面上解决应用扩展的痛点。前者关注金融级应用，因此更强调跨数据中心的实物一致性和高可用；后者相比之下更为“亲民”，作为一个后端程序员，能够有朝一日将一切持久化的扩展问题都交给数据库，开发一套业务代码，能够在几十到几十万并发访问下“平趟”，是件多爽的事！</p>
+<p>不过羞羞地说，眼下对tidb存储服务tikv的开发语言rust都还没入门，想顺利的分析代码进而有所贡献有点儿不切实际。不过根据我之前对rust的简单学习感受来说，这门语言学习曲线太陡了。不结合一个实体项目，反复嚼rustbook实在很难理解那么多零碎复杂的特性。所以我决定换个思路，从tikv入手，看看优质rust项目的开发套路，边看边学，应该感悟会更加深刻。</p>
+<p>我的初步打算是，从对tikv感兴趣的几个功能模块入手，对代码进行由表及里的分析，结合之前对数据库存储开发一点儿经历，学习分布式数据库存储的原理和架构。对于每部分代码用到的rust语言的feature，回到rustbook或者其他学习材料，进行学习和总结。希望能坚持下去。</p>
+<h2 id="学习-开发环境"><a href="#学习-开发环境" class="headerlink" title="学习/开发环境"></a>学习/开发环境</h2><ul>
+<li>操作系统：MacOS Sierra 10.12.5</li>
+<li>IDE：Visual Studio Code 1.14.2（插件：rust 0.4.2 + racer）</li>
+<li>Rust: rustup管理nightly-2017-05-29-x86_64-apple-darwin (tikv基于该环境编译和测试)</li>
+</ul>
+<h2 id="第一个PR"><a href="#第一个PR" class="headerlink" title="第一个PR"></a>第一个PR</h2><p>为了给自己迈出第一步的契机，参加了PingCAP的社区活动：<a href="https://pingcap.com/blog-tikv-built-in-zh" target="_blank" rel="external">十分钟成为Contributor</a>，为tikv提交了本人的第一个pr。pr本身没什么可说的，只是实现一个简单的abs内建函数。但作为一个对rust只有理论基础的人，借此机会完整地对tikv进行一次编译，还是踩了些坑，得到了不少实践感受。</p>
+<h3 id="nightly版本、jemalloc和libc"><a href="#nightly版本、jemalloc和libc" class="headerlink" title="nightly版本、jemalloc和libc"></a>nightly版本、jemalloc和libc</h3><p>和大多数rust项目一样，tikv也是night-only的。使用rustup升级到最新的nightly，编译tikv出现如下编译错误</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fi41ibf0kqj30t3085mys.jpg" alt="jemalloc编译错误"></p>
+<p>到rustup的lib目录下翻了翻，果然有两个对应libc的rlib文件。在1.20前似乎都只有一个libc文件。网上查了很久也没找到原因，所以暂时只能乖乖用PingCAP推荐的nightly-2017-05-29-x86_64编译了。</p>
+<p>note: 后来发现</p>
+<h3 id="librocksdb的版本"><a href="#librocksdb的版本" class="headerlink" title="librocksdb的版本"></a>librocksdb的版本</h3><p>tikv底层使用facebook的rocksdb作为单节点的kv存储。rocksdb是一个C++工程，所以其头文件的版本也至关重要。在写这篇文章的时候，tikv刚刚把对rocksdb的版本依赖从5.5.1升级到5.6.1。如果没有安装对应版本的rocksdb头文件，会出现如下编译错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">running: <span class="string">"c++"</span> <span class="string">"-O0"</span> <span class="string">"-ffunction-sections"</span> <span class="string">"-fdata-sections"</span> <span class="string">"-fPIC"</span> <span class="string">"-g"</span> <span class="string">"-m64"</span> <span class="string">"-std=c++11"</span> <span class="string">"-o"</span> <span class="string">"/Users/baihe/project/github/tikv/target/debug/build/librocksdb_sys-865a78dfa907ba49/out/crocksdb/c.o"</span> <span class="string">"-c"</span> <span class="string">"crocksdb/c.cc"</span></div><div class="line">cargo:warning=crocksdb/c.cc:2115:12: error: no member named <span class="string">'max_background_jobs'</span> <span class="keyword">in</span> <span class="string">'rocksdb::Options'</span>; did you mean <span class="string">'max_background_flushes'</span>?</div><div class="line">cargo:warning=  opt-&gt;rep.max_background_jobs = n;</div><div class="line">cargo:warning=           ^~~~~~~~~~~~~~~~~~~</div><div class="line">cargo:warning=           max_background_flushes</div><div class="line">cargo:warning=/usr/<span class="built_in">local</span>/include/rocksdb/options.h:506:7: note: <span class="string">'max_background_flushes'</span> declared here</div><div class="line">cargo:warning=  int max_background_flushes = 1;</div><div class="line">cargo:warning=      ^</div><div class="line">cargo:warning=crocksdb/c.cc:3181:11: warning: 7 enumeration values not handled <span class="keyword">in</span> switch: <span class="string">'kColumnFamilyName'</span>, <span class="string">'kFilterPolicyName'</span>, <span class="string">'kComparatorName'</span>... [-Wswitch]</div><div class="line">cargo:warning=  switch (prop) &#123;</div><div class="line">cargo:warning=          ^</div><div class="line">cargo:warning=crocksdb/c.cc:3210:11: warning: 10 enumeration values not handled <span class="keyword">in</span> switch: <span class="string">'kDataSize'</span>, <span class="string">'kIndexSize'</span>, <span class="string">'kFilterSize'</span>... [-Wswitch]</div><div class="line">cargo:warning=  switch (prop) &#123;</div><div class="line">cargo:warning=          ^</div><div class="line">cargo:warning=2 warnings and 1 error generated.</div><div class="line"><span class="built_in">exit</span> code: 1</div></pre></td></tr></table></figure>
+<h3 id="rustfmt问题"><a href="#rustfmt问题" class="headerlink" title="rustfmt问题"></a>rustfmt问题</h3><p>PingCAP团队使用的rustfmt是 0.6 的版本，如果使用最新版本会导致测试用例编译失败。</p>
+<h2 id="rust-clippy"><a href="#rust-clippy" class="headerlink" title="rust-clippy"></a>rust-clippy</h2><p>tikv项目中使用了rust-clippy。这是一个常用的rust源码检查工具，帮助开发者保证代码质量，避免不当的代码实践。由于本人目前rust零基础，却仍希望未来用rust做些事情的希望，这类工具对我是非常有价值的。</p>
+<p>rust-clippy本身是一个rust编译器插件，tikv中将它作为一个optional依赖，通过cargo或者rustc在编译时控制feature：clippy来实现打开/关闭该插件。</p>
+<p>clippy在打开状态下，可以检查出类似如下的代码问题：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">src/main.rs:8:5: 11:6 warning: you seem to be trying to use match <span class="keyword">for</span> destructuring a single type. Consider using `<span class="keyword">if</span> <span class="built_in">let</span>`, <span class="comment">#[warn(single_match)] on by default</span></div><div class="line">src/main.rs:8     match x &#123;</div><div class="line">src/main.rs:9         Some(y) =&gt; println!(<span class="string">"&#123;:?&#125;"</span>, y),</div><div class="line">src/main.rs:10         _ =&gt; ()</div><div class="line">src/main.rs:11     &#125;</div><div class="line">src/main.rs:8:5: 11:6 <span class="built_in">help</span>: Try</div><div class="line"><span class="keyword">if</span> <span class="built_in">let</span> Some(y) = x &#123; println!(<span class="string">"&#123;:?&#125;"</span>, y) &#125;</div></pre></td></tr></table></figure>
+<p>非常棒，我准备把rust-clippy作为以后rust项目的必备依赖。rust-clippy还有其他使用方法，具体可以浏览其<a href="https://github.com/rust-lang-nursery/rust-clippy" target="_blank" rel="external">github主页文档</a>。值得一提的是，rust-clippy也是个nightly-only项目。</p>
+<h2 id="Rust学习点"><a href="#Rust学习点" class="headerlink" title="Rust学习点"></a>Rust学习点</h2><p>这个系列应该是本人通过tikv源码学习rust和数据库技术的笔记。因此希望在每篇文章的结尾，对于这部分工作学习到的rust的关键点进行总结。并对这些关键点做编号，帮助反向索引。</p>
+<h3 id="KP-01：条件编译和feature"><a href="#KP-01：条件编译和feature" class="headerlink" title="KP-01：条件编译和feature"></a>KP-01：条件编译和feature</h3><p>上文中提到的rust-clippy作为编译器插件，由feature控制打开/关闭状态，因此去查询了feature和条件编译相关的功能。</p>
+<h4 id="属性（Attribute）"><a href="#属性（Attribute）" class="headerlink" title="属性（Attribute）"></a>属性（Attribute）</h4><p>属性是rust中支持的一种<code>修饰符(Annotation)</code>，通常用在一个声明（struct、mod、……）上，具体定义可以看<a href="https://doc.rust-lang.org/book/first-edition/attributes.html" target="_blank" rel="external">rustbook第一版中对于属性的描述</a>。完整的reference在<a href="https://doc.rust-lang.org/reference/attributes.html" target="_blank" rel="external">这里</a>，等有机会在看（估计就不会看……）。</p>
+<h4 id="cfg-cfg-attr属性"><a href="#cfg-cfg-attr属性" class="headerlink" title="cfg/cfg_attr属性"></a>cfg/cfg_attr属性</h4><p>在rust语言的一大堆属性中，有一类特殊属性，可以根据编译器传入的feature开关，控制代码编译的行为。该属性主要有如下两种方式：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#[cfg(foo)]</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Foo</span></span>;</div><div class="line"></div><div class="line"><span class="meta">#[cfg(feature = <span class="meta-string">"bar"</span>)]</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Bar</span></span></div><div class="line"></div><div class="line"><span class="meta">#[cfg(target_os = <span class="meta-string">"macos"</span>)]</span></div><div class="line"><span class="function"><span class="keyword">fn</span> <span class="title">macos_only</span></span>() &#123;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>放到C语言里，相当于预编译开关，代码比解释更明白：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">if</span> foo == true</span></div><div class="line"><span class="keyword">struct</span> Foo;</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> bar</span></div><div class="line"><span class="keyword">struct</span> Bar;</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">if</span> target_os == <span class="meta-string">"macos"</span></span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">macos_only</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="comment">// ...</span></div><div class="line">&#125;</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure>
+<p>另外在<code>cfg</code>属性里还支持布尔组合，如下所示：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#[cfg(any(foo, bar))]</span></div><div class="line"><span class="function"><span class="keyword">fn</span> <span class="title">needs_foo_or_bar</span></span>() &#123;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">#[cfg(all(unix, target_pointer_width = <span class="meta-string">"32"</span>))]</span></div><div class="line"><span class="function"><span class="keyword">fn</span> <span class="title">on_32bit_unix</span></span>() &#123;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">#[cfg(not(foo))]</span></div><div class="line"><span class="function"><span class="keyword">fn</span> <span class="title">needs_not_foo</span></span>() &#123;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>不用看文档，猜也能才出来<code>all</code>、<code>any</code>、<code>not</code>对应的是与、或、非。这些布尔表达式也支持嵌套，来实现更为复杂的条件判断。但总体而言，我还是更喜欢C语言的写法。</p>
+<p><code>cfg_attr</code>属性有两个操作数，可以基于条件来设置其他属性。<br><figure class="highlight rust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#[cfg_attr(a, b)]</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Foo</span></span>;</div></pre></td></tr></table></figure></p>
+<p>在条件a满足的情况下，相当于<br><figure class="highlight rust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#[b]</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Foo</span></span>;</div></pre></td></tr></table></figure></p>
+<p>否则就完全没有作用。</p>
+<p><a href="https://chrismorgan.info/blog/rust-cfg_attr.html" target="_blank" rel="external">这篇文章</a>描述了很多基于cfg_attr的有趣玩法，特别是可以实现动态文档和动态宏定义，有兴趣可以实践一下。</p>
+<h4 id="feature和plugin"><a href="#feature和plugin" class="headerlink" title="feature和plugin"></a>feature和plugin</h4><figure class="highlight rust"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#![feature(plugin)]</span></div><div class="line"><span class="meta">#![cfg_attr(feature = <span class="meta-string">"dev"</span>, plugin(clippy))]</span></div></pre></td></tr></table></figure>
+<p>上述代码出现在tikv源代码tikv-server.rs的文件开头，有了对于条件编译的相关背景，我们知道上述代码的作用是：</p>
+<ol>
+<li>打开feature：plugin用于支持插件加载</li>
+<li>如果编译器传入feature包含dev，使插件clippy生效</li>
+</ol>
+<p>note: 为啥用的是<code>#![cfg]</code>/<code>!#[cfg_attr]</code>而不是<code>#[cfg]</code>/<code>#[cfg_attr]</code>？看看<a href="https://doc.rust-lang.org/book/first-edition/attributes.html" target="_blank" rel="external">文档</a>就知道了。</p>
+<p>在tikv的cargo.toml文件中</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[features]</div><div class="line">default = []</div><div class="line">dev = ["clippy"]</div><div class="line">...</div><div class="line"></div><div class="line">[dependencies]</div><div class="line">clippy = &#123;version = "*", optional = true&#125;</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>这样，在tikv编译过程中，我们就可以通过执行<code>cargo build --features &quot;dev&quot;</code>将参数<code>--cfg feature=&quot;foo&quot;</code>传递给rustc编译器，就会引入optional依赖<code>clippy</code>，并依照代码中的<code>cfg_attr</code>属性为编译器加载<code>clippy</code>提供的插件。</p>
+<p>根据crates.io文档<a href="http://doc.crates.io/manifest.html" target="_blank" rel="external">The Manifest Format</a>，feature是用户在cargo.toml中定义的编译器flag：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">[features]</div><div class="line"></div><div class="line"># 默认feature集合，设置为空</div><div class="line">default = []</div><div class="line"></div><div class="line"># foo是没有依赖的feature，主要用于条件编译，例如：`#[cfg(feature = "foo")]`</div><div class="line">foo = []</div><div class="line"></div><div class="line"># dev是依赖于optional依赖clippy的feature。一方面dev可以作为alias让我们以更可读的方式描述feature，</div><div class="line">另一方面可以通过optional依赖引入该feature的扩展功能，如clippy提供的编译器插件。</div><div class="line">dev = ["clippy"]</div><div class="line"></div><div class="line"># session是对于外部依赖cookie提供的另一个feature：cookie的alias</div><div class="line">session = ["cookie/session"]</div><div class="line"></div><div class="line"># feature可以是一个组依赖，其中然包括optional依赖，也可以是session这种其他feature</div><div class="line">group-feature = ["jquery", "uglifier", "session"]</div><div class="line"></div><div class="line">[dependencies]</div><div class="line">cookie = "1.2.0"</div><div class="line"></div><div class="line">jquery = &#123; version = "1.0.2", optional = true &#125;</div><div class="line">uglifier = &#123; version = "1.5.3", optional = true &#125;</div><div class="line">clippy = &#123; version = "*", optional = true &#125;</div></pre></td></tr></table></figure>
+<h3 id="stable-nightly的区别"><a href="#stable-nightly的区别" class="headerlink" title="stable/nightly的区别"></a>stable/nightly的区别</h3><p>这是我学习rust最困惑的地方，似乎接触到的所有rust项目都声明自己是nightly-only，那stable还有个毛用啊？直到在<a href="http://xion.io/post/programming/rust-nightly-vs-stable.html" target="_blank" rel="external">A tale of two Rusts</a>这篇文章中看到这么一句话：</p>
+<blockquote>
+<p>Stable Rust is dead. Nightly Rust is the only Rust.</p>
+</blockquote>
+<p>Rust的stable和nightly的差别，可以类比python的2和3，甚至差异更大。文章中任务rust的nightly可以被认为是另一门变成语言。一方面，很多feature只有在nightly中才可以使用，这些特性在rustc的-Z参数中。如果在stable中使用该参数，会看到如下信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; rustc -Z extra-plugins=clippy                                                                             </div><div class="line">error: the option `Z` is only accepted on the nightly compiler</div></pre></td></tr></table></figure>
+<p>这些feature需要在nightly中经过实践验证，稳定后才有可能移入stable中。</p>
+<p>另一方面，存在一个重要的feature，永远不大可能从nightly进入stable。就是rust-clippy用到的：<br><figure class="highlight rust"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#![feature(plugin)]</span></div></pre></td></tr></table></figure></p>
+<p>可以认为凡是需要code-generation的rust程序，都得使用该feature。为啥改feature不可能stable，原文中的描述没怎么看懂，先放到这里，以后参悟：</p>
+<blockquote>
+<p>Why compiler plugins can never be stable, though? It’s because the internal API they are coded against goes too deep into the compiler bowels to ever get stabilized. If it were, it would severely limit the ability to further develop the language without significant breakage of the established plugins.</p>
+</blockquote>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
+<li>rustbook-1st中的<a href="https://doc.rust-lang.org/book/first-edition/conditional-compilation.html#conditional-compilation" target="_blank" rel="external">Conditional Compilation</a>和<a href="https://doc.rust-lang.org/book/first-edition/attributes.html" target="_blank" rel="external">Attributes</a></li>
+<li><a href="https://chrismorgan.info/blog/rust-cfg_attr.html" target="_blank" rel="external">Quick tip: the <code>#[cfg_attr]</code> attribute</a></li>
+<li><a href="http://xion.io/post/programming/rust-nightly-vs-stable.html" target="_blank" rel="external">A tale of two Rusts</a></li>
+<li>crates.io文档<a href="http://doc.crates.io/manifest.html" target="_blank" rel="external">The Manifest Format</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/rust/" rel="tag">#rust</a>
+          
+            <a href="/tags/tikv/" rel="tag">#tikv</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/28/rust-features/" rel="next" title="rust中的一些要点">
+                <i class="fa fa-chevron-left"></i> rust中的一些要点
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://img1.bimg.126.net/photo/Rm9TcTLaV0KuXDr36fyNNg==/1737263556258260335.jpg"
+               alt="bailaohe" />
+          <p class="site-author-name" itemprop="name">bailaohe</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#学习-开发环境"><span class="nav-number">1.</span> <span class="nav-text">学习/开发环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一个PR"><span class="nav-number">2.</span> <span class="nav-text">第一个PR</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nightly版本、jemalloc和libc"><span class="nav-number">2.1.</span> <span class="nav-text">nightly版本、jemalloc和libc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#librocksdb的版本"><span class="nav-number">2.2.</span> <span class="nav-text">librocksdb的版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rustfmt问题"><span class="nav-number">2.3.</span> <span class="nav-text">rustfmt问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rust-clippy"><span class="nav-number">3.</span> <span class="nav-text">rust-clippy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rust学习点"><span class="nav-number">4.</span> <span class="nav-text">Rust学习点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#KP-01：条件编译和feature"><span class="nav-number">4.1.</span> <span class="nav-text">KP-01：条件编译和feature</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#属性（Attribute）"><span class="nav-number">4.1.1.</span> <span class="nav-text">属性（Attribute）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cfg-cfg-attr属性"><span class="nav-number">4.1.2.</span> <span class="nav-text">cfg/cfg_attr属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#feature和plugin"><span class="nav-number">4.1.3.</span> <span class="nav-text">feature和plugin</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stable-nightly的区别"><span class="nav-number">4.2.</span> <span class="nav-text">stable/nightly的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bailaohe</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
